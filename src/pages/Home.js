@@ -1,10 +1,11 @@
-import { maxHeight, textAlign } from "@mui/system";
-import { Row, Typography, Image, Col, Card, Divider } from "antd";
+import {Link } from "react-router-dom";
+import { Row, Typography, Image, Col, Card, Divider, Badge } from "antd";
 
 // Icons
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import InfoIcon from '@mui/icons-material/Info';
 
 // animations
 import Grow from '@mui/material/Grow';
@@ -81,7 +82,7 @@ const Home = () => {
             </Row>
 
             {/* WHO IS SWIM FOR? */}
-            <Row justify={"center"} style={{marginTop:'20px', marginBottom:'20px'}}>
+            <Row justify={"center"} style={{marginTop:'50px', marginBottom:'20px'}}>
                 <Col span={22}>
                     <Divider className="reveal fade-bottom" orientation="center"><Text style={{fontSize:'2vw'}}><strong>WHO IS SWIM FOR?</strong></Text></Divider>
                     <Row justify={"center"} gutter={[16,8]}>
@@ -139,8 +140,33 @@ const Home = () => {
             </Row>
 
             {/* OUR HISTORY */}
-            <Row>
+            <Row align={"middle"} justify={"space-around"} style={{marginTop:'75px', marginBottom:'20px'}}>
+                <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
+                    <Image preview={false} src={ArethusaCirque}/>
+                </Col>
+                <Col className="reveal fade-right" style={{height:'100%', width:'100%', backgroundColor:'#fad283', paddingTop:'1vw', paddingBottom:'1vw'}} xs={22} sm={22} md={22} lg={8} xl={8} xxl={10}>    
+                    <Badge.Ribbon text="Since 2018">
+                        <Row justify={"center"}>
+                            <Col xs={22} sm={22} md={22} lg={16} xl={16} xxl={16}>
+                                <Text style={{textAlign:'left', fontSize:'2.5vw', fontFamily:'serif', fontWeight:'bolder'}}>OUR<br/>HISTORY</Text>
+                                <Col span={8}>
+                                    <Divider style={{color:'white', border:'3px solid',}}/>
+                                </Col>
+                                <Col>
+                                    <Text style={{fontSize:'18px', fontFamily:'serif'}}>
+                                        SWIM is built in partnership with the University of Calgary and IBM, through the IBM Alberta Centre for Advanced Studies.
+                                        <br/><br/>
+                                        SWIM was created with a combination of IBM (Cognos, Maximo and Db2 database management) and open source (RStudio, ARCGIS) products. The platform is hosted in the University of Calgary’s Data Centre.
+                                    </Text>
+                                    <br/>
+                                    <Button style={{backgroundColor:'#1890ff', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<InfoIcon />} variant="contained"><Link style={{color:'white'}} to={'/about'}>About</Link></Button>
 
+                                </Col>
+                            </Col>
+                        </Row>
+                    </Badge.Ribbon>
+                </Col>
+                
             </Row>
         </>
         
