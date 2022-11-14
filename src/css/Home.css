@@ -18,8 +18,15 @@
     font-size: max(2vw, 2vh);
 }
 
+.welcomeDescriptionDetails{
+    color: white;
+    font-size: max(1.3vw, 1.3vh);
+}
 
-/* Animations */
+
+
+
+/* Start Animations */
 .reveal {
     position: relative;
     opacity: 0;
@@ -73,4 +80,23 @@
       transform: translateX(0);
       opacity: 1;
     }
+}
+/* End Animations */
+
+
+/* Start Slider Styles */
+.sliderDetail{
+  text-align:'center';
+  font-size: max(1.2vw,2vh);
+  font-family:'serif';
+}
+.slider{
+    margin: 0;
+    height:'60vh';
+}
+
+.SliderTextTitle{
+  font-size: max(2vw, 3vh);
+  font-weight:bolder;
+  vertical-align:'baseline';
 }

@@ -1,5 +1,5 @@
 import {Link } from "react-router-dom";
-import { Row, Typography, Image, Col, Card, Divider, Badge } from "antd";
+import { Row, Typography, Image, Col, Card, Divider, Badge, Carousel } from "antd";
 
 // Icons
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -14,6 +14,9 @@ import Grow from '@mui/material/Grow';
 import SprayLake from '../assets/SprayLakes.jpg'
 import CastleMountain from '../assets/CastleMountain.webp'
 import ArethusaCirque from '../assets/ArethusaCirque.webp'
+import HomeSlider1 from '../assets/HomeSlider1.webp'
+import HomeSlider2 from '../assets/HomeSlider2.webp'
+import HomeSlider3 from '../assets/HomeSlider3.webp'
 
 import '../css/Home.css'
 import { useRef } from "react";
@@ -51,14 +54,16 @@ const Home = () => {
         <>
             {/* Welcome to SWIM */}
             <Row style={{backgroundImage:`url(${SprayLake})`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
-                <Col style={{textAlign:'center', marginTop:'7%',marginBottom:'7%'}} span={24}>
+                <Col style={{textAlign:'center', marginTop:'5%',marginBottom:'7%'}} span={24}>
                     <Text className="welcome">Welcome to</Text>
                     <br/>
                     <Text className="welcometitle">S W I M</Text>
                     <br/>
                     <Text className="welcomeDescription"><strong>S</strong>ustainable <strong>W</strong>atershed <strong>I</strong>ntegrated <strong>M</strong>anagement</Text>
-                    <br/>
-                    <Button style={{backgroundColor:'inherit', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="contained">Signup</Button>
+                    <br/><br/><br/><br/>
+                    <Text className="welcomeDescriptionDetails">SWIM is a data acquisition, analysis and visualization platform to eliminate water data silos and <br/> increase awareness and literacy of water issues.</Text>
+                    <br/><br/>
+                    <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
                     <Button onClick={handleReadMoreClick} style={{backgroundColor:'inherit', marginTop:'20px'}} variant="contained" startIcon={<KeyboardDoubleArrowDownIcon/>}>Read More</Button>
                 </Col>
             </Row>
@@ -167,6 +172,64 @@ const Home = () => {
                     </Badge.Ribbon>
                 </Col>
                 
+            </Row>
+
+            {/* USE CASES */}
+            <Row justify={"center"} style={{marginTop:'6%'}}>
+                <Col className="reveal fade-bottom">
+                    <Row justify={"center"}>
+                        <Col style={{width:'fit-content'}}>
+                            <Text style={{fontSize:'2.5vw', fontFamily:'serif', fontWeight:'bolder'}}>USE  CASES</Text>     
+                        </Col>
+                    </Row>
+                    <Row justify={"center"}>
+                        <Col style={{width:'50px', textAlign:'center'}}>
+                            <Divider orientation="center" style={{color:'black', border:'2px solid',}}/>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <Col style={{padding:'2vw'}}>
+                            <Text className="sliderDetail">Check out some different ways that SWIM has helped solve real world issues and inform decision making. </Text>  
+                        </Col>
+                    </Row>
+                </Col>
+                <Col className="reveal fade-bottom" span={24}>
+                    <Carousel autoplay>
+                        <div>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider1})`, height:'70vh'}}>
+                                <Row justify={"center"}>
+                                    <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center'}}>
+                                        <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>
+                                        <br/><br/><br/>
+                                        <Text style={{fontSize:'18px'}}>The Nature Conservancy of Canada developed a method to identify, rank and visualize hydrologically sensitive areas across the Bow River Basin (excluding Banff National Park). The results of their analyses are presented as a hydrologically sensitive heat map with the most sensitive zones dark colours and less sensitive zones lighter colours. Details on this interesting project can be found by following the ‘more information’ link.</Text>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </div>
+                        <div>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider2})`, height:'70vh'}}>
+                                <Row justify={"center"}>
+                                    <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center',}}>
+                                        <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>
+                                        <br/><br/><br/>
+                                        <Text style={{fontSize:'18px'}}>The Nature Conservancy of Canada developed a method to identify, rank and visualize hydrologically sensitive areas across the Bow River Basin (excluding Banff National Park). The results of their analyses are presented as a hydrologically sensitive heat map with the most sensitive zones dark colours and less sensitive zones lighter colours. Details on this interesting project can be found by following the ‘more information’ link.</Text>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </div>
+                        <div>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider3})`, height:'70vh'}}>
+                                <Row justify={"center"}>
+                                    <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center'}}>
+                                        <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>
+                                        <br/><br/><br/>
+                                        <Text style={{fontSize:'18px'}}>The Nature Conservancy of Canada developed a method to identify, rank and visualize hydrologically sensitive areas across the Bow River Basin (excluding Banff National Park). The results of their analyses are presented as a hydrologically sensitive heat map with the most sensitive zones dark colours and less sensitive zones lighter colours. Details on this interesting project can be found by following the ‘more information’ link.</Text>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </div>
+                    </Carousel>
+                </Col>
             </Row>
         </>
         
