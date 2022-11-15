@@ -71,8 +71,36 @@ const LayoutMain = () => {
           <Outlet/>
         </Content>
         
-        <Footer>
-          <Text>© 2022 MachineCodes, Canada. All rights reserved.</Text>
+        <Footer style={{padding:'5vh 5vh 1vh 5vh', backgroundColor:'black'}}>
+          <Row justify={"center"}>
+            <Col xs={22} sm={22} md={22} lg={22} xl={18} xxl={16}>
+              <Row>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>IBM Centre for Advanced Studies</Text>
+                </Col>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>Contact</Text>
+                </Col>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>Privacy Policy</Text>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>University of Calgary</Text>
+                </Col>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>Our Partners</Text>
+                </Col>
+                <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                  <Text className="footerLinks" style={{color:'white'}}>Cookies Disclaimer</Text>
+                </Col>
+              </Row>
+              <Row style={{marginTop:'5vh'}}>
+                <Text style={{color:'white'}}>© 2023 SWIM Platform | University of Calgary - IBM</Text>
+              </Row>
+            </Col>
+          </Row>
         </Footer>
         
       </Layout>

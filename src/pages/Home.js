@@ -1,5 +1,5 @@
 import {Link } from "react-router-dom";
-import { Row, Typography, Image, Col, Card, Divider, Badge, Carousel } from "antd";
+import { Row, Typography, Image, Col, Card, Divider, Badge, Carousel, Form, Input, Button as ButtonAD } from "antd";
 
 // Icons
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -17,6 +17,7 @@ import ArethusaCirque from '../assets/ArethusaCirque.webp'
 import HomeSlider1 from '../assets/HomeSlider1.webp'
 import HomeSlider2 from '../assets/HomeSlider2.webp'
 import HomeSlider3 from '../assets/HomeSlider3.webp'
+import SendIcon from '@mui/icons-material/Send';
 
 import '../css/Home.css'
 import { useRef } from "react";
@@ -49,6 +50,35 @@ const Home = () => {
     const handleReadMoreClick = () => {
         whatSWIMIsRef.current?.scrollIntoView({behavior: 'smooth'});
     };
+
+
+    // For contact form -- START
+    const layout = {
+        labelCol: {
+          span: 8,
+        },
+        wrapperCol: {
+          span: 16,
+        },
+    };
+      
+    /* eslint-disable no-template-curly-in-string */
+    const validateMessages = {
+        required: '${label} is required!',
+        types: {
+            email: '${label} is not a valid email!',
+            number: '${label} is not a valid number!',
+        },
+        number: {
+            range: '${label} must be between ${min} and ${max}',
+        },
+    };
+
+    const onFinish = (values) => {
+        console.log(values);
+    };
+    // Contact -- END
+
 
     return(
         <>
@@ -230,6 +260,70 @@ const Home = () => {
                         </div>
                     </Carousel>
                 </Col>
+            </Row>
+            {/* Contacts */}
+            <Row className="reveal fade-bottom" justify={"center"} style={{marginTop:'6%', backgroundColor:'lightblue', padding:'5vh 1px 20px 5vh'}}>
+                <Col xs={22} sm={22} md={8} lg={6} xl={6} xxl={4}>
+                    <Row justify={"center"}>
+                        <Col style={{width:'50px', textAlign:'center'}}>
+                            <Divider orientation="center" style={{color:'black', border:'2px solid',}}/>
+                        </Col> 
+                    </Row>
+                    <Row justify={"center"}>
+                        <Col style={{width:'fit-content', textAlign:'center'}}>
+                            <Text style={{fontSize:'1.5vw', fontFamily:'serif', fontWeight:'bolder', textAlign:'center'}}>CONTACT</Text>     
+                        </Col>
+                        <Col>
+                            <br/><br/>
+                            <Text>2500 University Dr NW Calgary, AB T2N 1N4</Text>
+                            <br/><br/>
+                            <Text>Tel: +1 403 220 6790</Text>
+                            <br/><br/>
+                            <Text>swim@ucalgary.ca</Text>
+                        </Col>
+                    </Row>
+                    
+                </Col>
+                <Col style={{marginTop:'1%'}} xs={22} sm={22} md={12} lg={10} xl={8} xxl={8}>
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                        <Form.Item
+                            name={['user', 'name']}
+                            label="Name"
+                        >
+                            <Input style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                        </Form.Item>
+                        <Form.Item
+                            name={['user', 'email']}
+                            label="Email"
+                            rules={[
+                            {
+                                type: 'email',
+                                required: true,
+                            },
+                            ]}
+                        >
+                            <Input style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                        </Form.Item>
+                        
+                        <Form.Item name={['user', 'subject']} label="Subject">
+                            <Input style={{border:'2px solid black', backgroundColor:'inherit'}}/>
+                        </Form.Item>
+                        <Form.Item name={['user', 'message']} label="Message">
+                            <Input.TextArea style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                        </Form.Item>
+                        <Form.Item
+                            wrapperCol={{
+                            ...layout.wrapperCol,
+                            offset: 8,
+                            }}
+                        >
+                            <ButtonAD style={{border:'2px solid black', backgroundColor:'black', color:'white', }} htmlType="submit">
+                                Submit
+                            </ButtonAD>
+                        </Form.Item>
+                    </Form>
+                </Col>
+
             </Row>
         </>
         

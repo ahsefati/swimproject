@@ -1,0 +1,81 @@
+.fullstory{
+    color:rgb(0, 0, 0);
+    font-size: max(2vw,3vh);
+    margin: 0;
+}
+
+.swimplatform{
+    color:rgb(0, 0, 0);
+    font-size: max(7vw,5vh);
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow'
+}
+
+.description{
+    color: rgb(0, 0, 0);
+    font-size: max(0.9vw, 1.5vh);
+}
+
+
+
+
+/* Start Animations */
+.reveal {
+    position: relative;
+    opacity: 0;
+}
+  
+.reveal.active {
+    opacity: 1;
+}
+
+.active.fade-bottom {
+    animation: fade-bottom 1s ease-in;
+}
+
+.active.fade-left {
+    animation: fade-left 1s ease-in;
+}
+
+.active.fade-right {
+    animation: fade-right 1s ease-in;
+}
+
+
+@keyframes fade-bottom {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
+@keyframes fade-left {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+
+@keyframes fade-right {
+    0% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+/* End Animations */
+
+
