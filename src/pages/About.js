@@ -65,7 +65,7 @@ const About = () => {
                     <Image preview={false} src={About01}/>
                 </Col>
                 <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
-                    <Divider orientation="center"><Text style={{fontSize:'2vw'}}><strong>M I S S I O N</strong></Text></Divider>
+                    <Divider orientation="center"><Text className="dividerTitle"><strong>M I S S I O N</strong></Text></Divider>
                     <div style={{fontSize:'18px', textAlign:'justify', textJustify:'inter-word'}}>
                     SWIM is a data analysis and visualization tool to eliminate data silos and acquire, analyze and visualize data to make smart (data-informed) decisions, achieve consensus on ‘one version of the truth’ and increase the public’s water literacy and awareness.
                     </div>
@@ -74,7 +74,7 @@ const About = () => {
             </Row>
             <Row ref={whatSWIMIsRef} align={"middle"} justify={"space-evenly"} style={{marginTop:'25px', marginBottom:'20px'}}>
                 <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
-                    <Divider orientation="center"><Text style={{fontSize:'2vw'}}><strong>V I S I O N</strong></Text></Divider>
+                    <Divider orientation="center"><Text className="dividerTitle"><strong>V I S I O N</strong></Text></Divider>
                     <div style={{fontSize:'18px', textAlign:'justify', textJustify:'inter-word'}}>
                     SWIM is a digital ‘sandbox’ where anyone interested in water’s state or water management within the Bow River Basin can access data to help make decisions with a whole watershed context.
                     <br/><br/>

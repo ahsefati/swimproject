@@ -6,6 +6,8 @@ import LayoutMain from "./pages/LayoutMain";
 import Home from "./pages/Home";
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Help from './pages/Help';
+import Notifications from './pages/Notifications';
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contact/>}/>
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/notifications' element={<Notifications/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -11,7 +11,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import SWIM_LOGO from '../assets/SWIM-Logo.webp'
 
 import '../css/Contact.css'
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const {Text, Title} = Typography
 const {Meta} = Card
@@ -33,7 +33,15 @@ const reveal = () => {
     }
 }
 
+
 const Contact = () => {
+    
+    useEffect(()=>{
+        setInterval(() => {
+            reveal()
+        }, 400);
+    },[])
+
     window.addEventListener('scroll', reveal);
 
     // Scroll to the reading section.
@@ -45,10 +53,10 @@ const Contact = () => {
     // For contact form -- START
     const layout = {
         labelCol: {
-          span: 8,
+          span: 24,
         },
         wrapperCol: {
-          span: 16,
+          span: 24,
         },
     };
       
@@ -89,7 +97,7 @@ const Contact = () => {
                         </Col>
                     </Row>
                     <Row justify={"center"} style={{marginTop:'10vh'}}>
-                        <Col span={16}>
+                        <Col className="reveal fade-bottom" xs={22} sm={22} md={12} lg={10} xl={8} xxl={8}>
                             <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                                 <Form.Item
                                     name={['user', 'name']}
@@ -119,7 +127,7 @@ const Contact = () => {
                                 <Form.Item
                                     wrapperCol={{
                                     ...layout.wrapperCol,
-                                    offset: 8,
+                                    offset: 0,
                                     }}
                                 >
                                     <ButtonAD style={{border:'2px solid black', backgroundColor:'black', color:'white', }} htmlType="submit">

@@ -17,7 +17,6 @@ import ArethusaCirque from '../assets/ArethusaCirque.webp'
 import HomeSlider1 from '../assets/HomeSlider1.webp'
 import HomeSlider2 from '../assets/HomeSlider2.webp'
 import HomeSlider3 from '../assets/HomeSlider3.webp'
-import SendIcon from '@mui/icons-material/Send';
 
 import '../css/Home.css'
 import { useRef } from "react";
@@ -55,10 +54,10 @@ const Home = () => {
     // For contact form -- START
     const layout = {
         labelCol: {
-          span: 8,
+          span: 24,
         },
         wrapperCol: {
-          span: 16,
+          span: 24,
         },
     };
       
@@ -91,7 +90,11 @@ const Home = () => {
                     <br/>
                     <Text className="welcomeDescription"><strong>S</strong>ustainable <strong>W</strong>atershed <strong>I</strong>ntegrated <strong>M</strong>anagement</Text>
                     <br/><br/><br/><br/>
-                    <Text className="welcomeDescriptionDetails">SWIM is a data acquisition, analysis and visualization platform to eliminate water data silos and <br/> increase awareness and literacy of water issues.</Text>
+                    <Row justify={"center"}>
+                        <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={12}>
+                            <Text className="welcomeDescriptionDetails">SWIM is a data acquisition, analysis and visualization platform to eliminate water data silos and increase awareness and literacy of water issues.</Text>
+                        </Col>
+                    </Row>
                     <br/><br/>
                     <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
                     <Button onClick={handleReadMoreClick} style={{backgroundColor:'inherit', marginTop:'20px'}} variant="contained" startIcon={<KeyboardDoubleArrowDownIcon/>}>Read More</Button>
@@ -101,7 +104,7 @@ const Home = () => {
             {/* WHAT IS SWIM? */}
             <Row ref={whatSWIMIsRef} align={"middle"} justify={"space-evenly"} style={{marginTop:'25px', marginBottom:'20px'}}>
                 <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
-                    <Divider orientation="left"><Text style={{fontSize:'2vw'}}><strong>WHAT IS SWIM?</strong></Text></Divider>
+                    <Divider orientation="left"><Text className="dividerTitle"><strong>WHAT IS SWIM?</strong></Text></Divider>
                     <div style={{fontSize:'18px', textAlign:'justify', textJustify:'inter-word'}}>
                         SWIM pools together data from multiple sources — sensors, scientists, and citizens — to create an accessible information reservoir that will support improved watershed science, policy and management across Canada.
                         <br/><br/>
@@ -119,7 +122,7 @@ const Home = () => {
             {/* WHO IS SWIM FOR? */}
             <Row justify={"center"} style={{marginTop:'50px', marginBottom:'20px'}}>
                 <Col span={22}>
-                    <Divider className="reveal fade-bottom" orientation="center"><Text style={{fontSize:'2vw'}}><strong>WHO IS SWIM FOR?</strong></Text></Divider>
+                    <Divider className="reveal fade-bottom" orientation="center"><Text className="dividerTitle"><strong>WHO IS SWIM FOR?</strong></Text></Divider>
                     <Row justify={"center"} gutter={[16,8]}>
                         <Col className="reveal fade-left" xs={22} sm={22} md={8} lg={8} xl={7} xxl={6}>
                             <Card
@@ -179,11 +182,11 @@ const Home = () => {
                 <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                     <Image preview={false} src={ArethusaCirque}/>
                 </Col>
-                <Col className="reveal fade-right" style={{height:'100%', width:'100%', backgroundColor:'#fad283', paddingTop:'1vw', paddingBottom:'1vw'}} xs={22} sm={22} md={22} lg={8} xl={8} xxl={10}>    
+                <Col className="reveal fade-right" style={{height:'100%', width:'100%', backgroundColor:'#fad283', paddingTop:'1vw', paddingBottom:'2vw'}} xs={22} sm={22} md={22} lg={8} xl={8} xxl={10}>    
                     <Badge.Ribbon text="Since 2018">
                         <Row justify={"center"}>
                             <Col xs={22} sm={22} md={22} lg={16} xl={16} xxl={16}>
-                                <Text style={{textAlign:'left', fontSize:'2.5vw', fontFamily:'serif', fontWeight:'bolder'}}>OUR<br/>HISTORY</Text>
+                                <Text className="dividerTitle" style={{textAlign:'left', fontFamily:'serif', fontWeight:'bolder'}}>OUR<br/>HISTORY</Text>
                                 <Col span={8}>
                                     <Divider style={{color:'white', border:'3px solid',}}/>
                                 </Col>
@@ -209,7 +212,7 @@ const Home = () => {
                 <Col className="reveal fade-bottom">
                     <Row justify={"center"}>
                         <Col style={{width:'fit-content'}}>
-                            <Text style={{fontSize:'2.5vw', fontFamily:'serif', fontWeight:'bolder'}}>USE  CASES</Text>     
+                            <Text className="dividerTitle" style={{fontFamily:'serif', fontWeight:'bolder'}}>USE  CASES</Text>     
                         </Col>
                     </Row>
                     <Row justify={"center"}>
@@ -262,25 +265,24 @@ const Home = () => {
                 </Col>
             </Row>
             {/* Contacts */}
-            <Row className="reveal fade-bottom" justify={"center"} style={{marginTop:'6%', backgroundColor:'lightblue', padding:'5vh 1px 20px 5vh'}}>
-                <Col xs={22} sm={22} md={8} lg={6} xl={6} xxl={4}>
-                    <Row justify={"center"}>
-                        <Col style={{width:'50px', textAlign:'center'}}>
-                            <Divider orientation="center" style={{color:'black', border:'2px solid',}}/>
+            <Row className="reveal fade-bottom" justify={"center"} style={{marginTop:'6%', backgroundColor:'lightblue'}}>
+                <Col xs={22} sm={22} md={8} lg={6} xl={6} xxl={6}>
+                    <Row>
+                        <Col style={{width:'50px', textAlign:'left'}}>
+                            <Divider orientation="left" style={{color:'black', border:'2px solid',}}/>
                         </Col> 
                     </Row>
-                    <Row justify={"center"}>
-                        <Col style={{width:'fit-content', textAlign:'center'}}>
-                            <Text style={{fontSize:'1.5vw', fontFamily:'serif', fontWeight:'bolder', textAlign:'center'}}>CONTACT</Text>     
+                    <Row>
+                        <Col style={{textAlign:'left'}}>
+                            <Text className="dividerTitle" style={{fontFamily:'serif', fontWeight:'bolder', textAlign:'center'}}>CONTACT</Text>     
+                            <br/><br/>
+                            <Text style={{textAlign:'left'}}>2500 University Dr NW Calgary, AB T2N 1N4</Text>
+                            <br/><br/>
+                            <Text style={{textAlign:'left'}}>Tel: +1 403 220 6790</Text>
+                            <br/><br/>
+                            <Text style={{textAlign:'left'}}>swim@ucalgary.ca</Text>
                         </Col>
-                        <Col>
-                            <br/><br/>
-                            <Text>2500 University Dr NW Calgary, AB T2N 1N4</Text>
-                            <br/><br/>
-                            <Text>Tel: +1 403 220 6790</Text>
-                            <br/><br/>
-                            <Text>swim@ucalgary.ca</Text>
-                        </Col>
+                        
                     </Row>
                     
                 </Col>
@@ -314,7 +316,7 @@ const Home = () => {
                         <Form.Item
                             wrapperCol={{
                             ...layout.wrapperCol,
-                            offset: 8,
+                            offset: 0,
                             }}
                         >
                             <ButtonAD style={{border:'2px solid black', backgroundColor:'black', color:'white', }} htmlType="submit">
