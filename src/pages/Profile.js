@@ -1,11 +1,16 @@
 import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag } from "antd";
+import Button from '@mui/material/Button';
 import { useEffect } from "react";
 import '../css/Profile.css'
+
+// Icons
+import SettingsIcon from '@mui/icons-material/Settings';
 
 // Images
 import userProfile from '../assets/userProfile.webp'
 import userProfile2 from '../assets/userProfile2.webp'
 import userProfile3 from '../assets/userProfile3.png'
+import Ribbon from "antd/lib/badge/Ribbon";
 
 const {Text} = Typography
 const {Meta} = Card
@@ -95,7 +100,7 @@ const Profile = () => {
 
     return(
         <>
-            <Row justify={"space-evenly"} gutter={[0,16]} style={{marginTop:'50px', marginBottom:'100px'}}>
+            <Row justify={"space-evenly"} gutter={[0,16]} style={{marginTop:'50px', marginBottom:'20vh'}}>
                 <Col className="reveal fade-left" xs={20} sm={20} md={10} lg={10} xl={6}>
                     <Card
                         cover={
@@ -109,108 +114,112 @@ const Profile = () => {
                     >
                         <Meta
                         
-                        title={<><strong>Amirhossein Sefati</strong><br/><Tag color="blue">@ahsefati</Tag></>}
+                        title={<><strong>Amirhossein Sefati</strong><br/><Row align={"middle"}><Tag style={{fontWeight:'bolder'}} color="blue">@ahsefati</Tag><SettingsIcon onClick={()=>window.location.href='/settings'} style={{color:'#276dd9', cursor:'pointer'}}/></Row></>}
                         description={<>
-                        DATA PROVIDER <br/>
+                        DATA ANALYSIS <br/>
                         Joined 17 Nov 2022
                         </>}
                         />
                     </Card>
                 </Col>
                 <Col className="reveal fade-right" xs={20} sm={20} md={12} lg={12} xl={12} xxl={10}>
-                    <Card>
-                        <Meta
-                            title="Details"
-                        />
-                                <Form {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-                                    <Form.Item
-                                        name={['user', 'username']}
-                                        label="Username:"
-                                        rules={[{
-                                            required:true
-                                        }]}
-                                    >
-                                        <Input placeholder="@ahsefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
-                                    </Form.Item>
 
-                                    <Form.Item
-                                        name={['user', 'fullname']}
-                                        label="Full Name:"
-                                        rules={[{
-                                            required:true
-                                        }]}
-                                    >
-                                        <Input placeholder="Amirhossein Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
-                                    </Form.Item>
+                        <Card>
+                            <Meta
+                                title={ <Col span={24}>
+                                            <Row align={"middle"}>
+                                                <Text>Details</Text>
+                                            </Row>
+                                        
+                                        </Col>
+                                    }
+                            />
+                                    <Form {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                                        
 
-                                    <Form.Item
-                                        name={['user', 'email']}
-                                        label="Email"
-                                        rules={[
-                                        {
-                                            type: 'email',
-                                            required: true,
-                                        },
-                                        ]}
-                                    >
-                                        <Input placeholder="amirhossein.sefati@ucalgary.ca" style={{border:'2px solid black', backgroundColor:'inherit'}} />
-                                    </Form.Item>
-
-                                    <Form.Item
-                                        name="phone"
-                                        label="Phone"
-                                        rules={[
-                                        {
-                                            required: false,
-                                            message: 'Please input your phone number!',
-                                        },
-                                        ]}
-                                    >
-                                        <Input
-                                            placeholder="+18253657563"
-                                            addonBefore={prefixSelector}
-                                            style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                        />
-                                    </Form.Item>
-                                    
-                                    <Form.Item name={['user', 'access']} label="Acess Level">
-                                        <Select
-                                            style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                            placeholder="Select an access level"
-                                            defaultValue={"dataanalysis"}
+                                        <Form.Item
+                                            name={['user', 'fullname']}
+                                            label="Full Name:"
+                                            rules={[{
+                                                required:true
+                                            }]}
                                         >
-                                            <Option value="reader">Reader</Option>
-                                            <Option value="dataanalysis">Data Analysis</Option>
-                                            <Option value="dataprovider">Data Provider</Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item name={['user', 'gender']} label="Gender">
-                                        <Select
-                                            style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                            placeholder="Select your gender"
-                                            defaultValue={"male"}
+                                            <Input defaultValue={"Amirhossein Sefati"} placeholder="Amirhossein Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            name={['user', 'email']}
+                                            label="Email"
+                                            rules={[
+                                            {
+                                                type: 'email',
+                                                required: true,
+                                            },
+                                            ]}
                                         >
-                                            <Option value="female">Female</Option>
-                                            <Option value="male">Male</Option>
-                                            <Option value="other">Other</Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item name={['user', 'bio']} label="Short Bio">
-                                        <Input.TextArea style={{border:'2px solid black', minHeight:'5vh', backgroundColor:'inherit'}} />
-                                    </Form.Item>
-                                    <Form.Item
-                                        wrapperCol={{
-                                        ...layout.wrapperCol,
-                                        offset: 0,
-                                        }}
-                                    >
-                                        <ButtonAD style={{border:'2px solid black', backgroundColor:'black', color:'white', marginTop:'10px', fontWeight:'bolder',}} htmlType="submit">
-                                            Update
-                                        </ButtonAD>
-                                    </Form.Item>
-                                </Form>
-                            
-                    </Card>
+                                            <Input defaultValue="amirhossein.sefati@ucalgary.ca" placeholder="amirhossein.sefati@ucalgary.ca" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            name="phone"
+                                            label="Phone"
+                                            rules={[
+                                            {
+                                                required: false,
+                                                message: 'Please input your phone number!',
+                                            },
+                                            ]}
+                                        >
+                                            <Input
+                                                defaultValue="8253657563"
+                                                placeholder="8253657563"
+                                                addonBefore={prefixSelector}
+                                                style={{border:'2px solid black', backgroundColor:'inherit'}}
+                                            />
+                                        </Form.Item>
+                                        
+                                        <Form.Item name={['user', 'access']} label="Acess Level">
+                                            <Select
+                                                style={{border:'2px solid black', backgroundColor:'inherit'}}
+                                                placeholder="Select an access level"
+                                                defaultValue={"dataanalysis"}
+                                            >
+                                                <Option value="reader">Reader</Option>
+                                                <Option value="dataanalysis">Data Analysis</Option>
+                                                <Option value="dataprovider">Data Provider</Option>
+                                            </Select>
+                                        </Form.Item>
+                                        <Form.Item name={['user', 'gender']} label="Gender">
+                                            <Select
+                                                style={{border:'2px solid black', backgroundColor:'inherit'}}
+                                                placeholder="Select your gender"
+                                                defaultValue={"male"}
+                                            >
+                                                <Option value="female">Female</Option>
+                                                <Option value="male">Male</Option>
+                                                <Option value="other">Other</Option>
+                                            </Select>
+                                        </Form.Item>
+                                        <Form.Item name={['user', 'bio']} label="Short Bio">
+                                            <Input.TextArea style={{border:'2px solid black', minHeight:'5vh', backgroundColor:'inherit'}} />
+                                        </Form.Item>
+                                        <Form.Item
+                                            wrapperCol={{
+                                            ...layout.wrapperCol,
+                                            offset: 0,
+                                            }}
+                                        >
+                                            <ButtonAD style={{backgroundColor:'black', color:'white', marginTop:'10px', fontWeight:'bolder'}} htmlType="submit">
+                                                Update
+                                            </ButtonAD>
+                                            
+                                            
+                                            
+                                        </Form.Item>
+                                    </Form>
+                                
+                        </Card>
+                    
                 </Col>
             </Row> 
         </>

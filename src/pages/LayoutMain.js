@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import {Col, Layout, Menu, Row, Typography, Affix, Image } from 'antd';
+import {Col, Layout, Menu, Row, Typography, Affix, Image, Divider } from 'antd';
 import '../css/Layout_.css';
 import {UserOutlined, BellOutlined, UnorderedListOutlined} from '@ant-design/icons';
 
@@ -27,6 +27,7 @@ const userItems = [
     {key:"Profile", label:<UserOutlined style={{fontSize:'20px'}}/>, 
         children: [ {key:"Account", label:<Link to={'/profile'}>Profile</Link>},
                     {key:"Settings", label:<Link to={'/settings'}>Settings</Link>},
+                    {type:'divider'},
                     {key:"Logout", label:<Link to={'/logout'}>Logout</Link>}
 
         ]
