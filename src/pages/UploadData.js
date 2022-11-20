@@ -1,4 +1,4 @@
-import { Row, Typography, Col, Empty, Layout, Menu } from "antd";
+import { Row, Typography, Col, Empty, Layout, Menu, Upload } from "antd";
 import { Outlet, Link } from "react-router-dom";
 import React from 'react';
 import { FolderOutlined, BulbOutlined, EnvironmentOutlined, GlobalOutlined } from '@ant-design/icons';
@@ -27,7 +27,7 @@ const reveal = () => {
 }
 
 
-const Dashboard = () => {
+const UploadData = () => {
     window.addEventListener('scroll', reveal);
 
     useEffect(()=>{
@@ -39,7 +39,7 @@ const Dashboard = () => {
     const items = [
         {key:'Data', icon:<FolderOutlined /> , label:'Data',
             children: [
-                {key:'UploadData', label:<Link to={'/dashboard'}>Upload File</Link>},
+                {key:'UploadData', label:<Link to={'/dashobard/uploadfile'}>Upload File</Link>},
                 {key:'MyData', label:'Data Manager'},
                 {key:'ExploreData', label:'Data Explorer'}
             ]
@@ -52,7 +52,7 @@ const Dashboard = () => {
         },
         {key:'Maps', icon:<EnvironmentOutlined /> , label:'Maps', 
             children: [
-                {key:'MapOverview', label:<Link to={'/dashboard/maps'}>Overview</Link>},
+                {key:'MapOverview', label:'Overview'},
             ]
         },
         {key:'Network', icon:<GlobalOutlined /> , label:'Network', 
@@ -66,37 +66,19 @@ const Dashboard = () => {
     return(
         <>
             {/* Welcome to SWIM Dashboard! */}
-            <Layout
-                
-                style={{
-                    padding: '24px 0 24px 1vw',
-                    
-                }}
-            >
-                <Sider breakpoint="md" collapsedWidth="50px">
-                    
-                    <Menu
-                        mode="inline"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['Data', 'Discussions', 'Maps', 'Network']}
-                        style={{
-                            height: '80vh',
-                        }}
-                        items={items}
-                    />
-                </Sider>
+            
                 <Content
                 style={{
                     padding: '0 1vw',
                     
                 }}
                 >
-                    <Outlet/>
+                    <Text>Hi here we can upload a file</Text>
                 </Content>
-            </Layout>
+            
         </>
         
     )
 }
 
-export default Dashboard;
+export default UploadData;

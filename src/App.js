@@ -11,6 +11,8 @@ import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Dashboard from './pages/Dashboard';
+  import UploadData from './pages/UploadData';
+  import Maps from './pages/Maps';
 import NotFound from "./pages/NotFound";
 
 
@@ -26,7 +28,11 @@ const App = () => {
           <Route path='/notifications' element={<Notifications/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/settings' element={<Settings/>}/>
-          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}>
+              <Route index element={<UploadData/>}/>
+              <Route path='/dashboard/maps' element={<Maps/>}/>
+          </Route>
+          
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
