@@ -11,8 +11,7 @@ const {Text} = Typography;
 
 const items = [
     {key:"Home", label:(<Link style={{fontSize:'16px'}} to={'/'}>Home</Link>)},
-    {key:"Tools",label:<Link style={{fontSize:'16px'}} to={'/tools'}>Tools</Link>},
-    {key:"Forum",label:<Link style={{fontSize:'16px'}} to={'/forum'}>Forum</Link>},
+    {key:"Dashboard",label:<Link style={{fontSize:'16px'}} to={'/dashboard'}><Text style={{fontWeight:'bold'}}>My Dashboard</Text></Link>},
     {key:"More", label:"More", 
         children:[  {key:"Help", label:<Link to={'/help'}>Help</Link>},
                     {key:"Contact", label:<Link to={'/contact'}>Contact</Link>},

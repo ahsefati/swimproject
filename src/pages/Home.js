@@ -229,7 +229,7 @@ const Home = () => {
                 <Col className="reveal fade-bottom" span={24}>
                     <Carousel autoplay>
                         <div>
-                            <Col span={24} style={{backgroundImage:`url(${HomeSlider1})`, height:'70vh'}}>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider1})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' ,height:'70vh'}}>
                                 <Row justify={"center"}>
                                     <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center'}}>
                                         <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>
@@ -240,7 +240,7 @@ const Home = () => {
                             </Col>
                         </div>
                         <div>
-                            <Col span={24} style={{backgroundImage:`url(${HomeSlider2})`, height:'70vh'}}>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider2})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' ,height:'70vh'}}>
                                 <Row justify={"center"}>
                                     <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center',}}>
                                         <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>
@@ -251,7 +251,7 @@ const Home = () => {
                             </Col>
                         </div>
                         <div>
-                            <Col span={24} style={{backgroundImage:`url(${HomeSlider3})`, height:'70vh'}}>
+                            <Col span={24} style={{backgroundImage:`url(${HomeSlider3})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' ,height:'70vh'}}>
                                 <Row justify={"center"}>
                                     <Col xs={22} sm={22} md={16} lg={16} xl={12} xxl={8} style={{height:'fit-content', padding:'2vw', backgroundColor:'white', marginTop:'7vh', textAlign:'center'}}>
                                         <Text className="SliderTextTitle">Investigating Hydrologically sensitive areas</Text>

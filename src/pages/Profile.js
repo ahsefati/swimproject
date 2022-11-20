@@ -1,16 +1,18 @@
 import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag } from "antd";
 import Button from '@mui/material/Button';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import '../css/Profile.css'
 
 // Icons
 import SettingsIcon from '@mui/icons-material/Settings';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 // Images
 import userProfile from '../assets/userProfile.webp'
 import userProfile2 from '../assets/userProfile2.webp'
 import userProfile3 from '../assets/userProfile3.png'
 import Ribbon from "antd/lib/badge/Ribbon";
+import { Link } from "react-router-dom";
 
 const {Text} = Typography
 const {Meta} = Card
@@ -98,6 +100,10 @@ const Profile = () => {
     };
     // Contact -- END
 
+
+    // Disable/Enable the form
+    const [formDisable, setFormDisable] = useState(true)
+
     return(
         <>
             <Row justify={"space-evenly"} gutter={[0,16]} style={{marginTop:'50px', marginBottom:'20vh'}}>
@@ -109,12 +115,14 @@ const Profile = () => {
                             </Row>
                         }
                         actions={[
-                        
-                        ]}
+                            <Link to={'/settings'}><SettingOutlined style={{fontSize:'1.5em'}} key="setting"/></Link>,
+                            <EditOutlined key="edit" onClick={()=>setFormDisable(!formDisable)} style={{fontSize:'1.5em'}}/>,
+                            
+                          ]}
                     >
                         <Meta
                         
-                        title={<><strong>Amirhossein Sefati</strong><br/><Row align={"middle"}><Tag style={{fontWeight:'bolder'}} color="blue">@ahsefati</Tag><SettingsIcon onClick={()=>window.location.href='/settings'} style={{color:'#276dd9', cursor:'pointer'}}/></Row></>}
+                        title={<><strong>Amirhossein Sefati</strong><br/><Row align={"middle"}><Tag style={{fontWeight:'bolder',}} color="blue">@ahsefati</Tag></Row></>}
                         description={<>
                         DATA ANALYSIS <br/>
                         Joined 17 Nov 2022
@@ -133,8 +141,12 @@ const Profile = () => {
                                         
                                         </Col>
                                     }
+                                actions={[
+                                    // <SettingsIcon key={"settings"} style={{color:'#276dd9'}}><Link to={'/settings'}></Link></SettingsIcon>,
+                                    
+                                ]}
                             />
-                                    <Form {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                                    <Form disabled={formDisable} {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                                         
 
                                         <Form.Item

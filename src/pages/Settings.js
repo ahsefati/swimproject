@@ -5,6 +5,7 @@ import '../css/Profile.css'
 // Images
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from "react-router-dom";
 
 const {Text} = Typography
 const {Meta} = Card
@@ -98,7 +99,7 @@ const Settings = () => {
                 <Col className="reveal fade-right" xs={20} sm={20} md={12} lg={12} xl={12} xxl={10}>
                     <Card>
                         <Meta
-                            title={<Row align={"middle"}><ArrowBackIcon style={{cursor:'pointer'}} onClick={()=>window.location.href='/profile'} /><Text style={{marginLeft:'10px'}}>Profile Settings</Text></Row>}
+                            title={<Row align={"middle"}><Link to={'/profile'}><ArrowBackIcon/></Link><Text style={{marginLeft:'10px',}}>Profile Settings</Text></Row>}
                         />
                                 <Form {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                                     

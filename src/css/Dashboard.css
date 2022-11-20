@@ -1,25 +1,17 @@
-.fullstory{
-    color:rgb(0, 0, 0);
-    font-size: max(2vw,2.5vh);
-    margin: 0;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow'
-}
 
 .swimplatform{
     color:rgb(0, 0, 0);
-    font-size: max(5vw,5vh) !important;
+    font-size: max(4vw,3vh);
     font-weight: bold;
     margin: 0;
+    padding: 0;
     font-family:'Franklin Gothic Medium', 'Arial Narrow'
 }
 
-.description{
-    color: rgb(0, 0, 0);
-    font-size: max(0.9vw, 1.5vh);
-}
-
-.dividerTitle{
-  font-size: max(2.2vw, 3vh);
+.temporary{
+  text-align:'center';
+  margin-top:'5%';
+  margin-bottom:'100%' !important;
 }
 
 

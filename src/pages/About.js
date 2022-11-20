@@ -6,7 +6,7 @@ import About01 from '../assets/About01.png'
 import About02 from '../assets/About02.webp'
 
 import '../css/About.css'
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const {Text} = Typography
 
@@ -38,6 +38,11 @@ const About = () => {
         whatSWIMIsRef.current?.scrollIntoView({behavior: 'smooth'});
     };
 
+    useEffect(()=>{
+        setInterval(() => {
+            reveal()
+        }, 400);
+    },[])
 
     return(
         <>
@@ -61,10 +66,10 @@ const About = () => {
             
             {/* ABOUT */}
             <Row ref={whatSWIMIsRef} align={"middle"} justify={"space-evenly"} style={{marginTop:'25px', marginBottom:'20px'}}>
-                <Col style={{marginTop:'20px', marginBottom:'20px'}} xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
+                <Col className="reveal fade-left" style={{marginTop:'20px', marginBottom:'20px'}} xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                     <Image preview={false} src={About01}/>
                 </Col>
-                <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
+                <Col className="reveal fade-right" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
                     <Divider orientation="center"><Text className="dividerTitle"><strong>M I S S I O N</strong></Text></Divider>
                     <div style={{fontSize:'18px', textAlign:'justify', textJustify:'inter-word'}}>
                     SWIM is a data analysis and visualization tool to eliminate data silos and acquire, analyze and visualize data to make smart (data-informed) decisions, achieve consensus on ‘one version of the truth’ and increase the public’s water literacy and awareness.
@@ -73,7 +78,7 @@ const About = () => {
                 </Col>
             </Row>
             <Row ref={whatSWIMIsRef} align={"middle"} justify={"space-evenly"} style={{marginTop:'25px', marginBottom:'20px'}}>
-                <Col className="reveal fade-left" xs={22} sm={22} md={22} lg={10} xl={8} xxl={8}>
+                <Col className="reveal fade-left" xs={{span:22, order:2}} sm={{span:22, order:2}} md={{span:22, order:2}} lg={{span:10, order:1}} xl={{span:8, order:1}} xxl={{span:8, order:1}}>
                     <Divider orientation="center"><Text className="dividerTitle"><strong>V I S I O N</strong></Text></Divider>
                     <div style={{fontSize:'18px', textAlign:'justify', textJustify:'inter-word'}}>
                     SWIM is a digital ‘sandbox’ where anyone interested in water’s state or water management within the Bow River Basin can access data to help make decisions with a whole watershed context.
@@ -82,7 +87,7 @@ const About = () => {
                     </div>
                     
                 </Col>
-                <Col style={{marginTop:'20px', marginBottom:'20px'}} xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
+                <Col className="reveal fade-right" style={{marginTop:'20px', marginBottom:'20px'}} xs={{span:22, order:1}} sm={{span:22, order:1}} md={{span:22, order:1}} lg={12} xl={12} xxl={12}>
                     <Image preview={false} src={About02}/>
                 </Col>
             </Row>

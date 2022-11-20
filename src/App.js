@@ -10,7 +10,9 @@ import Help from './pages/Help';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Dashboard from './pages/Dashboard';
 import NotFound from "./pages/NotFound";
+
 
 const App = () => {
   return (
@@ -24,6 +26,7 @@ const App = () => {
           <Route path='/notifications' element={<Notifications/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/settings' element={<Settings/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
