@@ -1,4 +1,4 @@
-import { Row, Typography, Col, Empty, Layout, Menu } from "antd";
+import { Row, Typography, Col, Card, Layout, Menu } from "antd";
 import { Outlet, Link } from "react-router-dom";
 import React from 'react';
 import { FolderOutlined, BulbOutlined, EnvironmentOutlined, GlobalOutlined } from '@ant-design/icons';
@@ -7,6 +7,7 @@ import '../css/Dashboard.css'
 
 const { Header, Content, Footer, Sider } = Layout;
 const {Text} = Typography
+const {Meta} = Card
 
 
 
@@ -51,8 +52,8 @@ const Dashboard = () => {
         },
         {key:'Discussions', icon:<BulbOutlined /> , label:'Discussions', 
             children: [
-                {key:'NewDiscussion', label:<Link to={'/dashboard/creatediscussion'}>Create a Discussions</Link>},
-                {key:'ViewDiscussions', label:'View Discussions'},
+                {key:'NewDiscussion', label:<Link to={'/dashboard/creatediscussion'}>Create a Discussion</Link>},
+                {key:'ViewDiscussions', label:<Link to={'/dashboard/viewdiscussions'}>View Discussions</Link>},
             ]
         },
         {key:'Network', icon:<GlobalOutlined /> , label:'Network', 

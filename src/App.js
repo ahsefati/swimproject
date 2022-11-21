@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard';
   import DataManager from './pages/DataManager';
   import DataExplorer from './pages/DataExplorer';
   import CreateDiscussion from './pages/CreateDiscussion';
+  import ViewDiscussion from './pages/ViewDiscussions';
 import NotFound from "./pages/NotFound";
 
 
@@ -36,7 +37,8 @@ const App = () => {
               <Route path='/dashboard/uploaddata' element={<UploadData/>}/>
               <Route path='/dashboard/datamanager' element={<DataManager/>}/>
               <Route path='/dashboard/dataexplorer' element={<DataExplorer/>}/>
-              <Route path='/dashboard/createDiscussion' element={<CreateDiscussion/>}/>
+              <Route path='/dashboard/creatediscussion' element={<CreateDiscussion/>}/>
+              <Route path='/dashboard/viewdiscussions' element={<ViewDiscussion/>}/>
           </Route>
           
           <Route path="*" element={<NotFound />} />

@@ -247,7 +247,7 @@ const DataManager = () => {
                         <Text className="uploadtitle">Data Manager</Text>
                     </Row>
                     
-                    <Col style={{marginTop:'4vh'}} span={22}>
+                    <Col style={{marginTop:'4vh'}} span={24}>
                         <Table columns={columns} dataSource={dataSource} pagination={{current: 1, pageSize: 10,}}/>
                     </Col>    
                     
