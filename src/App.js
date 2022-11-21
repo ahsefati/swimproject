@@ -13,6 +13,9 @@ import Settings from './pages/Settings';
 import Dashboard from './pages/Dashboard';
   import UploadData from './pages/UploadData';
   import Maps from './pages/Maps';
+  import DataManager from './pages/DataManager';
+  import DataExplorer from './pages/DataExplorer';
+  import CreateDiscussion from './pages/CreateDiscussion';
 import NotFound from "./pages/NotFound";
 
 
@@ -29,8 +32,11 @@ const App = () => {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/settings' element={<Settings/>}/>
           <Route path='/dashboard' element={<Dashboard/>}>
-              <Route index element={<UploadData/>}/>
-              <Route path='/dashboard/maps' element={<Maps/>}/>
+              <Route index element={<Maps/>}/>
+              <Route path='/dashboard/uploaddata' element={<UploadData/>}/>
+              <Route path='/dashboard/datamanager' element={<DataManager/>}/>
+              <Route path='/dashboard/dataexplorer' element={<DataExplorer/>}/>
+              <Route path='/dashboard/createDiscussion' element={<CreateDiscussion/>}/>
           </Route>
           
           <Route path="*" element={<NotFound />} />

@@ -1,0 +1,95 @@
+
+.uploadtitle{
+    color:rgb(0, 0, 0);
+    font-size: max(2vw,2vh);
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow'
+}
+
+.uploadstep{
+  color:rgb(0, 0, 0);
+  font-size: max(1.3vw,2vh);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow'
+}
+
+.uploadfilefoldertitle{
+  color:rgb(0, 0, 0);
+  font-size: max(1vw,1.4vh);
+  margin: 0;
+  padding: 0;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow'
+}
+
+
+.temporary{
+  text-align:'center';
+  margin-top:'5%';
+  margin-bottom:'100%' !important;
+}
+
+
+
+
+/* Start Animations */
+.reveal {
+    position: relative;
+    opacity: 0;
+}
+  
+.reveal.active {
+    opacity: 1;
+}
+
+.active.fade-bottom {
+    animation: fade-bottom 1s ease-in;
+}
+
+.active.fade-left {
+    animation: fade-left 1s ease-in;
+}
+
+.active.fade-right {
+    animation: fade-right 1s ease-in;
+}
+
+
+@keyframes fade-bottom {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
+@keyframes fade-left {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+
+@keyframes fade-right {
+    0% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+/* End Animations */
+
+

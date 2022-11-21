@@ -5,6 +5,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@arcgis/core": "^4.25.4",
+    "@ckeditor/ckeditor5-build-classic": "^35.3.1",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
@@ -17,6 +19,7 @@
     "esri-loader": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.18.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"

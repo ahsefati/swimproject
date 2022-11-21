@@ -37,22 +37,22 @@ const Dashboard = () => {
     },[])
 
     const items = [
+        {key:'Maps', icon:<EnvironmentOutlined /> , label:'Maps', 
+            children: [
+                {key:'MapOverview', label:<Link to={'/dashboard'}>Overview</Link>},
+            ]
+        },
         {key:'Data', icon:<FolderOutlined /> , label:'Data',
             children: [
-                {key:'UploadData', label:<Link to={'/dashboard'}>Upload File</Link>},
-                {key:'MyData', label:'Data Manager'},
-                {key:'ExploreData', label:'Data Explorer'}
+                {key:'UploadData', label:<Link to={'/dashboard/uploaddata'}>Upload File</Link>},
+                {key:'MyData', label:<Link to={'/dashboard/datamanager'}>Data Manager</Link>},
+                {key:'ExploreData', label:<Link to={'/dashboard/dataexplorer'}>Data Explorer</Link>}
             ]
         },
         {key:'Discussions', icon:<BulbOutlined /> , label:'Discussions', 
             children: [
-                {key:'NewDiscussion', label:'Create a Discussion'},
+                {key:'NewDiscussion', label:<Link to={'/dashboard/creatediscussion'}>Create a Discussions</Link>},
                 {key:'ViewDiscussions', label:'View Discussions'},
-            ]
-        },
-        {key:'Maps', icon:<EnvironmentOutlined /> , label:'Maps', 
-            children: [
-                {key:'MapOverview', label:<Link to={'/dashboard/maps'}>Overview</Link>},
             ]
         },
         {key:'Network', icon:<GlobalOutlined /> , label:'Network', 
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     
                 }}
             >
-                <Sider breakpoint="md" collapsedWidth="50px">
+                <Sider breakpoint="md" collapsedWidth="50px" style={{backgroundColor:'white'}}>
                     
                     <Menu
                         mode="inline"
