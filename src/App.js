@@ -17,6 +17,9 @@ import Dashboard from './pages/Dashboard';
   import DataExplorer from './pages/DataExplorer';
   import CreateDiscussion from './pages/CreateDiscussion';
   import ViewDiscussion from './pages/ViewDiscussions';
+
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 import NotFound from "./pages/NotFound";
 
 
@@ -32,6 +35,9 @@ const App = () => {
           <Route path='/notifications' element={<Notifications/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/settings' element={<Settings/>}/>
+          <Route path='/signup' element={<Signup/>}/>
+          <Route path='/login' element={<Login/>}/>
+          
           <Route path='/dashboard' element={<Dashboard/>}>
               <Route index element={<Maps/>}/>
               <Route path='/dashboard/uploaddata' element={<UploadData/>}/>

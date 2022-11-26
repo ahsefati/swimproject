@@ -1,13 +1,13 @@
-import { Row, Typography, Col, Button, Layout, Menu, Upload, Divider } from "antd";
+import { Row, Typography, Col, Button, Layout, Menu, Upload, Divider, message } from "antd";
 import { Outlet, Link } from "react-router-dom";
 import React from 'react';
-import { UploadOutlined, CloudUploadOutlined, EnvironmentOutlined, GlobalOutlined } from '@ant-design/icons';
+import { UploadOutlined, CloudUploadOutlined, EnvironmentOutlined, InboxOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import '../css/UploadData.css'
 
 const { Header, Content, Footer, Sider } = Layout;
 const {Text} = Typography
-
+const { Dragger } = Upload;
 
 
 const reveal = () => {
@@ -26,6 +26,27 @@ const reveal = () => {
     }
 }
 
+const props = {
+    name: 'file',
+    multiple: true,
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+    height:'50vh'
+};
+
 
 const UploadData = () => {
     window.addEventListener('scroll', reveal);
@@ -36,38 +57,7 @@ const UploadData = () => {
         }, 100);
     },[])
 
-    const [fileList, setFileList] = useState([
-        // {
-        //   uid: '-1',
-        //   name: 'xxx.png',
-        //   status: 'done',
-        //   url: 'http://www.baidu.com/xxx.png',
-        // },
-    ]);
-
-    const handleChange = (info) => {
-        let newFileList = [...info.fileList];
     
-        // 1. Limit the number of uploaded files
-        // Only to show two recent uploaded files, and old ones will be replaced by the new
-        newFileList = newFileList.slice(-5);
-    
-        // 2. Read from response and show file link
-        newFileList = newFileList.map((file) => {
-          if (file.response) {
-            // Component will show file.url as link
-            file.url = file.response.url;
-          }
-          return file;
-        });
-        setFileList(newFileList);
-    };
-
-    const props = {
-        action: '',
-        onChange: handleChange,
-        multiple: true,
-    };
 
     return(
         <>
@@ -79,34 +69,17 @@ const UploadData = () => {
                     
                 }}
                 >
-                    <Row style={{marginTop:'2vh'}} justify={"center"}>
-                        <Text className="uploadtitle">Upload Tool</Text>
+                    <Row style={{marginTop:'2vh', marginBottom:'2vh'}} justify={"center"}>
+                        <Text className="uploadtitle">Upload File Tool</Text>
                     </Row>
-                    <Row justify={"center"}>
-                        <Col xs={22} sm={22} md={16} lg={12} xl={10} xxl={10}>
-                            <Row style={{marginTop:'5vh'}} justify={"start"}>
-                                <Text className="uploadstep">1- Upload Your Files</Text>
-                            </Row>
-                            <Divider style={{marginTop:'2vh'}} orientation="left"><Text className="uploadfilefoldertitle">File Upload</Text></Divider>
-                            <Row justify={"center"}>
-                                <Upload {...props} fileList={fileList}>
-                                    <Button icon={<UploadOutlined />}>Upload a file</Button>
-                                </Upload>
-                            </Row>
-                            <Divider style={{marginTop:'2vh'}} orientation="left"><Text className="uploadfilefoldertitle">or Directory Upload</Text></Divider>
-                            <Row justify={"center"}>
-                                <Upload {...props} fileList={fileList} directory>
-                                    <Button icon={<UploadOutlined />}>Upload a folder</Button>
-                                </Upload>
-                            </Row>
-                            <Row style={{marginTop:'5vh'}} justify={"start"}>
-                                <Text className="uploadstep">2- Save the Files</Text>
-                            </Row>
-                            <Row style={{marginTop:'5vh',}} justify={"center"}>
-                                    <Button style={{color:'green', fontWeight:'bolder'}} icon={<CloudUploadOutlined />}>Save on Cloud</Button>
-                            </Row>
-                        </Col>
-                    </Row>
+
+                    <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                        <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                    </Dragger>
+                    
                 </Content>
             
         </>

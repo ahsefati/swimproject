@@ -8,12 +8,23 @@ import { height } from "@mui/system";
 
 import { CommentOutlined, HeartOutlined, RightCircleFilled, } from '@ant-design/icons';
 
+import r01 from '../assets/Avatars/random01.svg'
+import r02 from '../assets/Avatars/random02.svg'
+import r03 from '../assets/Avatars/random03.svg'
+import r04 from '../assets/Avatars/random04.svg'
+import r05 from '../assets/Avatars/random05.svg'
+import r06 from '../assets/Avatars/random06.svg'
+import r07 from '../assets/Avatars/random07.svg'
+import r08 from '../assets/Avatars/random08.svg'
+import r09 from '../assets/Avatars/random09.svg'
+import r10 from '../assets/Avatars/random10.svg'
+
 const { Header, Content, Footer, Sider } = Layout;
 const {Text} = Typography
 const {Meta} = Card
 const {Search} = Input
 
-
+let ravatars = [r01, r02, r03, r04, r05, r06, r07, r08, r09, r10]
 
 const reveal = () => {
     var reveals = document.querySelectorAll(".reveal");
@@ -33,7 +44,7 @@ const reveal = () => {
 
 const discussionsDataMain = [];
 for (let i = 0; i < 19; i++) {
-    let src = "https://joeschmoe.io/api/v1/random"
+    let src = ravatars[Math.floor(Math.random() * 10)]
     discussionsDataMain.push({
         id: i.toString(),
         title: `${i} - Discussion Title`,
@@ -46,8 +57,7 @@ for (let i = 0; i < 19; i++) {
 }
 
 const ViewDiscussion = () => {
-
-
+    
     const [discussionsData, setDiscussionsData] = useState(discussionsDataMain)
 
     const handleSearch = (textToSearch) => {

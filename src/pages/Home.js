@@ -96,7 +96,9 @@ const Home = () => {
                         </Col>
                     </Row>
                     <br/><br/>
-                    <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
+                    <Link to={'/signup'}>
+                        <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
+                    </Link>
                     <Button onClick={handleReadMoreClick} style={{backgroundColor:'inherit', marginTop:'20px'}} variant="contained" startIcon={<KeyboardDoubleArrowDownIcon/>}>Read More</Button>
                 </Col>
             </Row>
