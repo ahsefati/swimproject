@@ -94,9 +94,12 @@ const Maps = () => {
                 }}
                 
                 >
-                    <div style={{height:'80vh', width:'80vw', zIndex:1000}} ref={mapDiv}>
+                    <Row justify={"center"}>
                         
-                    </div>
+                        <div style={{height:'80vh', width:'78vw', zIndex:1000}} ref={mapDiv}>
+                            
+                        </div>
+                    </Row>
                     
                 </Content>
             

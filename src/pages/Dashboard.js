@@ -81,7 +81,8 @@ const Dashboard = () => {
                         defaultSelectedKeys={['1']}
                         defaultOpenKeys={['Data', 'Discussions', 'Maps', 'Network']}
                         style={{
-                            height: '80vh',
+                            height: 'fit-content',
+                            
                         }}
                         items={items}
                     />
