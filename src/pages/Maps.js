@@ -1,7 +1,6 @@
-import { Row, Typography, Col, Empty, Layout, Menu, Upload } from "antd";
-import { Outlet, Link, Await } from "react-router-dom";
+import { Row, Layout,  } from "antd";
+
 import React, { useRef } from 'react';
-import { FolderOutlined, BulbOutlined, EnvironmentOutlined, GlobalOutlined } from '@ant-design/icons';
 import { useEffect } from "react";
 import '../css/Dashboard.css'
 
@@ -11,8 +10,7 @@ import Expand from '@arcgis/core/widgets/Expand';
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 
-const { Header, Content, Footer, Sider } = Layout;
-const {Text} = Typography
+const { Content, } = Layout;
 
 
 
@@ -96,7 +94,7 @@ const Maps = () => {
                 >
                     <Row justify={"center"}>
                         
-                        <div style={{height:'80vh', width:'78vw', zIndex:1000}} ref={mapDiv}>
+                        <div style={{height:'80vh', width:'78vw'}} ref={mapDiv}>
                             
                         </div>
                     </Row>
