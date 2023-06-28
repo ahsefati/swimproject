@@ -51,7 +51,9 @@ const Maps = () => {
 
         const view = new MapView({
             container: mapDiv.current,
-            map: webmap
+            map: webmap,
+            center: [-114, 51],
+            zoom: 11
         });
 
         const bookmarks = new Bookmarks({
