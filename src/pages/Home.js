@@ -78,11 +78,16 @@ const Home = () => {
     };
     // Contact -- END
 
+    const handleTest = () => {
+        console.log("Test")
+        fetch('http://localhost:5000/').then(res => res.json()).then(resp => console.log(resp))
+    }
 
     return(
         <>
             {/* Welcome to SWIM */}
             <Row style={{backgroundImage:`url(${SprayLake})`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+                <Button variant="contained" onClick={handleTest}>Test here!</Button>
                 <Col style={{textAlign:'center', marginTop:'5%',marginBottom:'7%'}} span={24}>
                     <Text className="welcome">Welcome to</Text>
                     <br/>
