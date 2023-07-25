@@ -9,49 +9,6 @@ import '../css/DataManager.css'
 const { Header, Content, Footer, Sider } = Layout;
 const {Text} = Typography
 
-const data = [
-    {
-        key: '1',
-        name: 'Test 1',
-        dateUpload: '12 December 2022',
-    },
-    {
-        key: '2',
-        name: 'Test 2',
-        dateUpload: '14 December 2022',
-    },
-    {
-        key: '3',
-        name: 'Test 3',
-        dateUpload: '10 October 2022',
-    },
-    {
-        key: '4',
-        name: 'Test 4',
-        dateUpload: '18 September 2022',
-    },
-    {
-        key: '5',
-        name: 'Test 5',
-        dateUpload: '12 August 2022',
-    },
-    {
-        key: '6',
-        name: 'Test 6',
-        dateUpload: '7 October 2022',
-    },
-    {
-        key: '7',
-        name: 'Test 7',
-        dateUpload: '11 September 2022',
-    },
-    {
-        key: '8',
-        name: 'Test 8',
-        dateUpload: '10 August 2022',
-    },
-];
-
 const reveal = () => {
     var reveals = document.querySelectorAll(".reveal");
   
@@ -71,11 +28,23 @@ const reveal = () => {
 
 const DataManager = () => {
 
-    const [dataSource, setDataSource] = useState(data)
+    const [dataSource, setDataSource] = useState([])
 
     window.addEventListener('scroll', reveal);
 
     useEffect(()=>{
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/getmyfiles', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, 
+          method: 'GET',
+        }).then((response) => response.json())
+        .then((res) => {
+          console.log(res.data)
+          setDataSource(res.data)
+        });
+
         setInterval(() => {
             reveal()
         }, 100);
@@ -99,7 +68,7 @@ const DataManager = () => {
     };
 
     const handleDelete = (key) => {
-        const newData = dataSource.filter((item) => item.key !== key);
+        const newData = dataSource.filter((item) => item.id !== key);
         setDataSource(newData);
     };
 
@@ -204,16 +173,23 @@ const DataManager = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            width: '35%',
+            width: '20%',
             ...getColumnSearchProps('name'),
         },
         {
+            title: 'Description',
+            dataIndex: 'desc',
+            key: 'desc',
+            width: '25%',
+            ...getColumnSearchProps('desc'),
+        },
+        {
             title: 'Date',
-            dataIndex: 'dateUpload',
-            key: 'dateUpload',
-            width: '30%',
-            ...getColumnSearchProps('dateUpload'),
-            sorter: (a, b) => new Date(a.dateUpload) - new Date(b.dateUpload),
+            dataIndex: 'date',
+            key: 'date',
+            width: '15%',
+            ...getColumnSearchProps('date'),
+            sorter: (a, b) => new Date(a.date) - new Date(b.date),
             sortDirections: ['descend', 'ascend'],
             responsive: ['md']
         },
@@ -226,7 +202,6 @@ const DataManager = () => {
                 <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
                     <a>Delete</a>
                 </Popconfirm>
-                <a style={{marginLeft:'10px', color:'gray', cursor:'not-allowed'}}>Rename</a>
                 </>
                 ) : null,
         },

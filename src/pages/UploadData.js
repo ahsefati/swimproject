@@ -1,39 +1,63 @@
-import { Row, Typography, Col, Button, Layout, Menu, Upload, Divider, message } from "antd";
-import { Outlet, Link } from "react-router-dom";
-import React from 'react';
-import { UploadOutlined, CloudUploadOutlined, EnvironmentOutlined, InboxOutlined } from '@ant-design/icons';
-import { useEffect, useState } from "react";
+import { Row, Typography, Layout, Upload, message, Button, Input } from "antd";
+import React, { useEffect, useState } from "react";
 import '../css/UploadData.css'
 
-const { Header, Content, Footer, Sider } = Layout;
-const {Text} = Typography
+const { Content } = Layout;
+const { Text } = Typography;
 const { Dragger } = Upload;
+const { TextArea } = Input;
 
+const UploadData = () => {
 
-const reveal = () => {
-    var reveals = document.querySelectorAll(".reveal");
-  
-    for (var i = 0; i < reveals.length; i++) {
-      var windowHeight = window.innerHeight;
-      var elementTop = reveals[i].getBoundingClientRect().top;
-      var elementVisible = 150;
-  
-      if (elementTop < windowHeight - elementVisible) {
-        reveals[i].classList.add("active");
+  const [fileToUpload, setFileToUpload] = useState()
+  const [descriptionOfFile, setDescriptionOfFile] = useState("")
+
+  const handleFileUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+
+    // You can add additional metadata to the form data
+    formData.append('file_desc', descriptionOfFile);
+    formData.append('upload_date', new Date().toISOString().split('T')[0]);
+
+    try {
+      const response = await fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log(response)
+        message.success('File uploaded successfully!');
       } else {
-        reveals[i].classList.remove("active");
+        message.error('File upload failed.');
       }
+    } catch (error) {
+      console.error('Error occurred during file upload:', error);
+      message.error('File upload failed.');
     }
-}
+  };
 
-const props = {
+  const props = {
     name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
+    multiple: false,
+    maxCount:1,
+    customRequest: ({ file, onSuccess, onError }) => {
+      // Call your custom function to handle file upload
+      handleFileUpload(file)
+        .then(() => {
+          onSuccess();
+        })
+        .catch((error) => {
+          onError(error);
+        });
+    },
+    beforeUpload: () => false, // To prevent default upload behavior
+    onChange: (info) => {
       const { status } = info.file;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
+        setFileToUpload(info.file)
       }
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
@@ -41,50 +65,30 @@ const props = {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
-    },
-    height:'50vh'
-};
+    height: '30vh'
+  };
 
+  return (
+    <>
+      {/* Welcome to SWIM Dashboard! */}
+      <Content style={{ padding: '0 1vw' }}>
+        <Row style={{ marginTop: '2vh', marginBottom: '2vh' }} justify={"center"}>
+          <Text className="uploadtitle">Upload File Tool</Text>
+        </Row>
+ 
+        <Dragger {...props}>
+          <p className="ant-upload-text">Click or drag file to this area to select your file</p>
+        </Dragger>
+        <TextArea value={descriptionOfFile} onChange={e=>setDescriptionOfFile(e.target.value)} style={{margin:'24px 0px 24px 0px'}} rows={4} placeholder="Please write the file description here..." maxLength={1000}/>
+        <Row>
+          <Button onClick={handleFileUpload}>
+            Click to Upload
+          </Button>
+        </Row>
 
-const UploadData = () => {
-    window.addEventListener('scroll', reveal);
-
-    useEffect(()=>{
-        setInterval(() => {
-            reveal()
-        }, 100);
-    },[])
-
-    
-
-    return(
-        <>
-            {/* Welcome to SWIM Dashboard! */}
-            
-                <Content
-                style={{
-                    padding: '0 1vw',
-                    
-                }}
-                >
-                    <Row style={{marginTop:'2vh', marginBottom:'2vh'}} justify={"center"}>
-                        <Text className="uploadtitle">Upload File Tool</Text>
-                    </Row>
-
-                    <Dragger {...props}>
-                        <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                    </Dragger>
-                    
-                </Content>
-            
-        </>
-        
-    )
+      </Content>
+    </>
+  )
 }
 
 export default UploadData;

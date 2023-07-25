@@ -8,10 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 // Images
-import userProfile from '../assets/userProfile.webp'
-import userProfile2 from '../assets/userProfile2.webp'
 import userProfile3 from '../assets/userProfile3.png'
-import Ribbon from "antd/lib/badge/Ribbon";
 import { Link } from "react-router-dom";
 
 const {Text} = Typography
@@ -78,9 +75,6 @@ const Profile = () => {
             }}
           >
             <Option value="1">+1</Option>
-            <Option value="33">+33</Option>
-            <Option value="44">+44</Option>
-            <Option value="49">+49</Option>
           </Select>
         </Form.Item>
     );
@@ -104,6 +98,52 @@ const Profile = () => {
     // Disable/Enable the form
     const [formDisable, setFormDisable] = useState(true)
 
+    // To fill data in the fields to be updated/viewed
+    const [userData, setUserData] = useState({
+        firstname:'',
+        lastname:'',
+        phone:'',
+        email:'',
+        image:'',
+        access_level:''
+    })
+    const fillData = () => {
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/getUserData', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            method: 'GET',
+            })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setUserData({...data.user})
+        });
+    }
+
+    // To Authenticate
+    const [isAuthorized, setIsAuthorized] = useState(false)
+    useEffect(()=>{
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/isAuthorized', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            method: 'GET',
+            }).then((response) => response.json())
+            .then((data) => {
+                if (!data.user[0]?.authorized){
+                    window.location="https://swim-watershed.ucalgary.ca/"
+                }else{
+                    fillData()
+                }
+                setIsAuthorized(data.user[0]?.authorized)
+                
+            });
+    },[])
+
+
     return(
         <>
             <Row justify={"space-evenly"} gutter={[0,16]} style={{marginTop:'50px', marginBottom:'20vh'}}>
@@ -111,22 +151,18 @@ const Profile = () => {
                     <Card
                         cover={
                             <Row justify={"center"}>
-                                <Image preview={false} style={{textAlign:'center'}}  src={userProfile3}/>
+                                <Image preview={false} height={"300px"} width={"300px"} style={{textAlign:'center'}}  src={userData?.image.startsWith("https://") ? userData?.image : userProfile3}/>
                             </Row>
                         }
-                        actions={[
-                            <Link to={'/settings'}><SettingOutlined style={{fontSize:'1.5em'}} key="setting"/></Link>,
-                            <EditOutlined key="edit" onClick={()=>setFormDisable(!formDisable)} style={{fontSize:'1.5em'}}/>,
-                            
-                          ]}
+                        
                     >
                         <Meta
                         
-                        title={<><strong>Amirhossein Sefati</strong><br/><Row align={"middle"}><Tag style={{fontWeight:'bolder',}} color="blue">@ahsefati</Tag></Row></>}
-                        description={<>
-                        DATA ANALYSIS <br/>
-                        Joined 17 Nov 2022
-                        </>}
+                        title={<><strong>{userData?.firstname} {userData?.lastname}</strong><br/><Row align={"middle"}><Tag style={{fontWeight:'bolder',}} color="blue">{userData?.access_level}</Tag></Row></>}
+                        // description={<>
+                        // DATA ANALYSIS <br/>
+                        // Joined 17 Nov 2022
+                        // </>}
                         />
                     </Card>
                 </Col>
@@ -146,17 +182,31 @@ const Profile = () => {
                                     
                                 ]}
                             />
-                                    <Form disabled={formDisable} {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                                    <Form {...layout} style={{marginTop:'30px'}} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                                         
 
                                         <Form.Item
-                                            name={['user', 'fullname']}
-                                            label="Full Name:"
+                                            name={['user', 'firstname']}
+                                            label="Firstname:"
+                                            value={userData?.firstname}
+                                            onChange={e=>setUserData(...userData, {firstname:e.target.value})}
                                             rules={[{
                                                 required:true
                                             }]}
                                         >
-                                            <Input defaultValue={"Amirhossein Sefati"} placeholder="Amirhossein Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                            <Input defaultValue={userData?.firstname} placeholder={userData?.firstname} style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            name={['user', 'lastname']}
+                                            label="lastname:"
+                                            value={userData?.lastname}
+                                            onChange={e=>setUserData(...userData, {lastname:e.target.value})}
+                                            rules={[{
+                                                required:true
+                                            }]}
+                                        >
+                                            <Input defaultValue={userData?.lastname} placeholder={userData?.lastname} style={{border:'2px solid black', backgroundColor:'inherit'}} />
                                         </Form.Item>
 
                                         <Form.Item
@@ -169,11 +219,11 @@ const Profile = () => {
                                             },
                                             ]}
                                         >
-                                            <Input defaultValue="amirhossein.sefati@ucalgary.ca" placeholder="amirhossein.sefati@ucalgary.ca" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                            <Input defaultValue={userData?.email} placeholder={userData?.email} style={{border:'2px solid black', backgroundColor:'inherit'}} />
                                         </Form.Item>
 
                                         <Form.Item
-                                            name="phone"
+                                            name={['user', 'phone']}
                                             label="Phone"
                                             rules={[
                                             {
@@ -183,14 +233,15 @@ const Profile = () => {
                                             ]}
                                         >
                                             <Input
-                                                defaultValue="8253657563"
-                                                placeholder="8253657563"
+                                                defaultValue={userData?.phone}
+                                                value={userData?.phone}
+                                                onChange={e=>setUserData(...userData, {phone:e.target.value})}
                                                 addonBefore={prefixSelector}
                                                 style={{border:'2px solid black', backgroundColor:'inherit'}}
                                             />
                                         </Form.Item>
                                         
-                                        <Form.Item name={['user', 'access']} label="Acess Level">
+                                        {/* <Form.Item name={['user', 'access_level']} label="Acess Level">
                                             <Select
                                                 style={{border:'2px solid black', backgroundColor:'inherit'}}
                                                 placeholder="Select an access level"
@@ -200,21 +251,12 @@ const Profile = () => {
                                                 <Option value="dataanalysis">Data Analysis</Option>
                                                 <Option value="dataprovider">Data Provider</Option>
                                             </Select>
-                                        </Form.Item>
-                                        <Form.Item name={['user', 'gender']} label="Gender">
-                                            <Select
-                                                style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                                placeholder="Select your gender"
-                                                defaultValue={"male"}
-                                            >
-                                                <Option value="female">Female</Option>
-                                                <Option value="male">Male</Option>
-                                                <Option value="other">Other</Option>
-                                            </Select>
-                                        </Form.Item>
-                                        <Form.Item name={['user', 'bio']} label="Short Bio">
+                                        </Form.Item> */}
+
+                                
+                                        {/* <Form.Item name={['user', 'bio']} label="Short Bio">
                                             <Input.TextArea style={{border:'2px solid black', minHeight:'5vh', backgroundColor:'inherit'}} />
-                                        </Form.Item>
+                                        </Form.Item> */}
                                         <Form.Item
                                             wrapperCol={{
                                             ...layout.wrapperCol,

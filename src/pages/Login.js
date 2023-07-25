@@ -1,4 +1,4 @@
-import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag, Divider } from "antd";
+import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag, Divider, message } from "antd";
 import { useEffect } from "react";
 import '../css/Profile.css'
 import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
@@ -87,7 +87,22 @@ const Login = () => {
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        console.log(JSON.stringify(values.user));
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/loginbyform', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            method: 'POST',
+            body: JSON.stringify(values.user)
+        }).then((response) => response.json())
+        .then((data) => {
+            if (data.message===-1){
+                message.error("User doesn't exist or the password is wrong!")
+            }else{
+                window.location="https://swim-watershed.ucalgary.ca"
+            }
+        });
     };
     // Contact -- END
 
@@ -100,8 +115,7 @@ const Login = () => {
                         
                         <Row style={{marginBottom:'3vh'}} justify={"center"}>
                             <Text className="profiletitle" style={{marginBottom:'2vh'}}>Login</Text>
-                            <ButtonAD type="primary" style={{marginBottom:'1vh', backgroundColor:'#0077ff'}} block icon={<GoogleOutlined />} size={"large"}>Login with Google</ButtonAD>
-                            <ButtonAD type="primary" style={{backgroundColor:'#3b5998'}} block icon={<FacebookOutlined />} size={"large"}>Login with Facebook</ButtonAD>
+                            <ButtonAD type="primary" style={{marginBottom:'1vh', backgroundColor:'#0077ff'}} block icon={<GoogleOutlined />} size={"large"} onClick={()=>window.location="https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/login"}>Login with Google</ButtonAD>                        
                         </Row>
                         
 

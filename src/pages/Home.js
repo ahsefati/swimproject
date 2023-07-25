@@ -20,6 +20,8 @@ import HomeSlider3 from '../assets/HomeSlider3.webp'
 
 import '../css/Home.css'
 import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const {Text, Title} = Typography
 const {Meta} = Card
@@ -78,16 +80,26 @@ const Home = () => {
     };
     // Contact -- END
 
-    const handleTest = () => {
-        console.log("Test")
-        fetch('http://localhost:5000/').then(res => res.json()).then(resp => console.log(resp))
-    }
+
+    // To authenticate
+    const [isAuthorized, setIsAuthorized] = useState(false)
+    useEffect(()=>{
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/isAuthorized', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            method: 'GET',
+            }).then((response) => response.json())
+            .then((data) => {
+            setIsAuthorized(data.user[0]?.authorized)
+            });
+    },[])
 
     return(
         <>
             {/* Welcome to SWIM */}
             <Row style={{backgroundImage:`url(${SprayLake})`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
-                <Button variant="contained" onClick={handleTest}>Test here!</Button>
                 <Col style={{textAlign:'center', marginTop:'5%',marginBottom:'7%'}} span={24}>
                     <Text className="welcome">Welcome to</Text>
                     <br/>
@@ -101,9 +113,11 @@ const Home = () => {
                         </Col>
                     </Row>
                     <br/><br/>
-                    <Link to={'/signup'}>
-                        <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
-                    </Link>
+                    {!isAuthorized &&
+                        <Link to={'/signup'}>
+                            <Button style={{backgroundColor:'white', fontWeight:'bold', marginTop:'20px', marginRight:'20px'}} startIcon={<AccountCircleIcon />} variant="outlined">Signup</Button>
+                        </Link>
+                    }
                     <Button onClick={handleReadMoreClick} style={{backgroundColor:'inherit', marginTop:'20px'}} variant="contained" startIcon={<KeyboardDoubleArrowDownIcon/>}>Read More</Button>
                 </Col>
             </Row>

@@ -1,4 +1,4 @@
-import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag, Divider } from "antd";
+import { Row, Typography, Col, Image, Card, Button as ButtonAD, Form, Input, Select, Tag, Divider, message } from "antd";
 import { useEffect } from "react";
 import '../css/Profile.css'
 import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
@@ -70,9 +70,6 @@ const Signup = () => {
             }}
           >
             <Option value="1">+1</Option>
-            <Option value="33">+33</Option>
-            <Option value="44">+44</Option>
-            <Option value="49">+49</Option>
           </Select>
         </Form.Item>
     );
@@ -88,7 +85,22 @@ const Signup = () => {
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        console.log(JSON.stringify(values.user));
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/loginform', {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            }, 
+            method: 'POST',
+            body: JSON.stringify(values.user)
+        }).then((response) => response.json())
+        .then((data) => {
+            if (data.message===-1){
+                message.error("User already exists!")
+            }else{
+                window.location="https://swim-watershed.ucalgary.ca"
+            }
+        });
     };
     // Contact -- END
 
@@ -101,8 +113,7 @@ const Signup = () => {
                         
                         <Row style={{marginBottom:'3vh'}} justify={"center"}>
                             <Text className="profiletitle" style={{marginBottom:'2vh'}}>Signup</Text>
-                            <ButtonAD type="primary" style={{marginBottom:'1vh', backgroundColor:'#0077ff'}} block icon={<GoogleOutlined />} size={"large"}>Login with Google</ButtonAD>
-                            <ButtonAD type="primary" style={{backgroundColor:'#3b5998'}} block icon={<FacebookOutlined />} size={"large"}>Login with Facebook</ButtonAD>
+                            <ButtonAD type="primary" style={{marginBottom:'1vh', backgroundColor:'#0077ff'}} block icon={<GoogleOutlined />} size={"large"} onClick={()=>window.location="https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/login"}>Login with Google</ButtonAD>                        
                         </Row>
                         
 
@@ -115,13 +126,23 @@ const Signup = () => {
                                     
 
                                     <Form.Item
-                                        name={['user', 'fullname']}
-                                        label="Full Name"
+                                        name={['user', 'firstname']}
+                                        label="First Name"
                                         rules={[{
                                             required:true
                                         }]}
                                     >
-                                        <Input placeholder="Ex. Amirhossein Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        <Input placeholder="Ex. Amirhossein" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        name={['user', 'lastname']}
+                                        label="Last Name"
+                                        rules={[{
+                                            required:true
+                                        }]}
+                                    >
+                                        <Input placeholder="Ex. Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
                                     </Form.Item>
 
                                     <Form.Item
@@ -153,29 +174,6 @@ const Signup = () => {
                                             addonBefore={prefixSelector}
                                             style={{border:'2px solid black', backgroundColor:'inherit'}}
                                         />
-                                    </Form.Item>
-                                    
-                                    <Form.Item name={['user', 'access']} label="Acess Level">
-                                        <Select
-                                            style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                            placeholder="Select an access level"
-                                            defaultValue={"reader"}
-                                        >
-                                            <Option value="reader">Reader</Option>
-                                            <Option value="dataanalysis">Data Analysis</Option>
-                                            <Option value="dataprovider">Data Provider</Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item name={['user', 'gender']} label="Gender">
-                                        <Select
-                                            style={{border:'2px solid black', backgroundColor:'inherit'}}
-                                            placeholder="Select your gender"
-                                            defaultValue={"male"}
-                                        >
-                                            <Option value="female">Female</Option>
-                                            <Option value="male">Male</Option>
-                                            <Option value="other">Other</Option>
-                                        </Select>
                                     </Form.Item>
 
                                     <Form.Item

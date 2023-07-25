@@ -5,11 +5,12 @@ import {UserOutlined, BellOutlined, UnorderedListOutlined} from '@ant-design/ico
 
 import SWIM_LOGO from '../assets/SWIM-Logo.webp'
 import { height } from "@mui/system";
+import { useEffect, useState } from "react";
 
 const { Header, Content, Footer } = Layout;
 const {Text} = Typography;
 
-const items = [
+const itemsLoggedIn = [
     {key:"Home", label:(<Link style={{fontSize:'16px'}} to={'/'}>Home</Link>)},
     {key:"Dashboard",label:<Link style={{fontSize:'16px'}} to={'/dashboard'}><Text style={{fontWeight:'bold'}}>My Dashboard</Text></Link>},
     {key:"More", label:"More", 
@@ -20,20 +21,43 @@ const items = [
     }
 ]
 
+const itemsNotUser = [
+  {key:"Home", label:(<Link style={{fontSize:'16px'}} to={'/'}>Home</Link>)},
+  {key:"Signup",label:<Link style={{fontSize:'16px'}} to={'/signup'}><Text style={{fontWeight:'bold'}}>Login/Signup</Text></Link>},
+  {key:"More", label:"More", 
+      children:[  {key:"Help", label:<Link to={'/help'}>Help</Link>},
+                  {key:"Contact", label:<Link to={'/contact'}>Contact</Link>},
+                  {key:"About", label:<Link to={'/about'}>About</Link>}
+      ]
+  }
+]
+
 const userItems = [
     // {key:"Profile", label:(<Link style={{fontSize:'16px'}} to={'/'}>Home</Link>)}
     {key:"Notifications", label:<Link to={'/notifications'}><BellOutlined style={{fontSize:'20px'}}/></Link>},
     {key:"Profile", label:<UserOutlined style={{fontSize:'20px'}}/>, 
         children: [ {key:"Account", label:<Link to={'/profile'}>Profile</Link>},
-                    {key:"Settings", label:<Link to={'/settings'}>Settings</Link>},
                     {type:'divider'},
-                    {key:"Logout", label:<Link onClick={()=>message.success("Logged-out Successfully!")}>Logout</Link>}
-
+                    // {key:"Logout", label:<Link onClick={()=>message.success("Logged-out Successfully!")}>Logout</Link>}
+                    {key:"Logout", label:<Link onClick={()=>window.location="https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/logout"}>Logout</Link>}
         ]
     },
 ]
 
 const LayoutMain = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  useEffect(()=>{
+    fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/isAuthorized', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, 
+          method: 'GET',
+        }).then((response) => response.json())
+        .then((data) => {
+          setIsAuthorized(data.user[0]?.authorized)
+        });
+  },[])
 
   return (
     <>
@@ -49,19 +73,21 @@ const LayoutMain = () => {
                       theme="light"
                       mode="horizontal"
                       defaultSelectedKeys={window.location.href.split("/").pop()?window.location.href.split("/").pop():"Home"}
-                      items={items}
+                      items={isAuthorized?itemsLoggedIn:itemsNotUser}
                       overflowedIndicator={<UnorderedListOutlined />}
                   />
             </Col>
-            <Col xs={{span:8,order:3}} sm={{span:10,order:3}} md={{span:5,order:3}} lg={{span:4,order:3}} xl={{span:4,order:3}} xxl={{span:4,order:3}}>
-                  <Menu
-                      theme="light"
-                      mode="horizontal"
-                      selectedKeys="noSelectedKeys!"
-                      items={userItems}
-                      
-                  />
-            </Col>
+            {isAuthorized &&
+              <Col xs={{span:8,order:3}} sm={{span:10,order:3}} md={{span:5,order:3}} lg={{span:4,order:3}} xl={{span:4,order:3}} xxl={{span:4,order:3}}>
+                    <Menu
+                        theme="light"
+                        mode="horizontal"
+                        selectedKeys="noSelectedKeys!"
+                        items={userItems}
+                        
+                    />
+              </Col>
+            }
           </Row>
         </Affix>
             
