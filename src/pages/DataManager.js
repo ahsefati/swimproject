@@ -67,8 +67,22 @@ const DataManager = () => {
         setSearchText('');
     };
 
-    const handleDelete = (key) => {
-        const newData = dataSource.filter((item) => item.id !== key);
+    const handleDelete = (name) => {
+        console.log(name)
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/delete', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, 
+          body:JSON.stringify({
+            "name": name
+          }),
+          method: 'POST',
+        }).then((response) => response.json())
+        .then((res) => {
+          console.log(res)
+        });
+        const newData = dataSource.filter((item) => item.name !== name);
         setDataSource(newData);
     };
 
@@ -199,7 +213,7 @@ const DataManager = () => {
             width:'25%',
             render: (_, record) =>
                 dataSource.length >= 1 ? (<>
-                <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.name)}>
                     <a>Delete</a>
                 </Popconfirm>
                 </>

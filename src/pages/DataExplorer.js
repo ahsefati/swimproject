@@ -257,8 +257,7 @@ const DataExplorer = () => {
             width:'25%',
             render: (_, record) =>
                 dataSource.length >= 1 ? (<>
-                <a style={{marginLeft:'10px', color:'gray', cursor:'not-allowed'}}>Download</a>
-                <a style={{marginLeft:'10px',}}>Request Access</a>
+                <a style={{marginLeft:'10px'}}>Download</a>
                 </>
                 ) : null,
         },

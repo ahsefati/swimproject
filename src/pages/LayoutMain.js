@@ -123,7 +123,7 @@ const LayoutMain = () => {
                 </Col>
               </Row>
               <Row style={{marginTop:'5vh'}}>
-                <Text style={{color:'white'}}>© 2023 SWIM Platform | University of Calgary - IBM</Text>
+                <Text style={{color:'white'}}>© 2023 SWIM Platform | University of Calgary</Text>
               </Row>
             </Col>
           </Row>
