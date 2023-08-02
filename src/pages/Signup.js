@@ -143,6 +143,7 @@ const Signup = () => {
                                         }]}
                                     >
                                         <Input placeholder="Ex. Sefati" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        <Input placeholder="Ex. Alex" style={{border:'2px solid black', backgroundColor:'inherit'}} />
                                     </Form.Item>
 
                                     <Form.Item
@@ -155,7 +156,7 @@ const Signup = () => {
                                         },
                                         ]}
                                     >
-                                        <Input placeholder="Ex. amirhossein.sefati@ucalgary.ca" style={{border:'2px solid black', backgroundColor:'inherit'}} />
+                                        <Input placeholder="Ex. alex@myemail.com" style={{border:'2px solid black', backgroundColor:'inherit'}} />
                                     </Form.Item>
 
                                     <Form.Item
@@ -170,7 +171,7 @@ const Signup = () => {
                                     >
                                         <Input
                                             
-                                            placeholder="8253657563"
+                                            placeholder="phone number"
                                             addonBefore={prefixSelector}
                                             style={{border:'2px solid black', backgroundColor:'inherit'}}
                                         />
