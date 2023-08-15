@@ -214,8 +214,12 @@ const DataManager = () => {
             render: (_, record) =>
                 dataSource.length >= 1 ? (<>
                 <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.name)}>
-                    <a>Delete</a>
+                    <a style={{color:'red'}}>Delete</a>
                 </Popconfirm>
+                {(record.name.includes(".jpeg") || record.name.includes(".jpg") || record.name.includes(".png") || record.name.includes(".pdf") ) &&
+                    <a style={{marginLeft:'12px'}} href={"https://swim-watershed.ucalgary.ca/cgi-bin/uploadedfiles/"+record.name}>Preview</a>
+                }
+                <a download style={{marginLeft:'12px'}} href={"https://swim-watershed.ucalgary.ca/cgi-bin/uploadedfiles/"+record.name}>Download</a>
                 </>
                 ) : null,
         },

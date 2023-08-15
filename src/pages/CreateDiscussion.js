@@ -1,4 +1,4 @@
-import { Row, Typography, Layout, Col, Button} from "antd";
+import { Row, Typography, Layout, Col, Button, message, Input} from "antd";
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -36,7 +36,8 @@ const reveal = () => {
 const CreateDiscussion = () => {
 
     
-
+    const [discussionData , setDiscussionData] = useState("<h1>Title here...</h1><p>Discussion here...</p><h1>difhsdhsk</h1><p>hsdfgfsdgf</p><h1>dsf</h1><h2>FFF</h2>")
+    const [title, setTitle] = useState("")
     window.addEventListener('scroll', reveal);
 
     useEffect(()=>{
@@ -45,6 +46,32 @@ const CreateDiscussion = () => {
         }, 100);
     },[])
 
+    const onPublishDiscussion = async () => {
+        
+        const formData = new FormData();
+        
+        console.log(title)
+        formData.append('title', title);
+        formData.append('content', discussionData);
+        formData.append('date', new Date().toISOString().split('T')[0]);
+
+        try {
+            const response = await fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/creatediscussion', {
+              method: 'POST',
+              body: formData,
+            });
+      
+            if (response.ok) {
+              console.log(response)
+              message.success('Discussion has been published successfully!');
+            } else {
+              message.error('Discussion publishing failed.');
+            }
+          } catch (error) {
+            console.error('Error occurred during discussion publishing:', error);
+            message.error('Discussion publishing failed.');
+          }
+    }
 
     return(
         <>
@@ -58,16 +85,17 @@ const CreateDiscussion = () => {
                 >
                     <Row style={{marginTop:'3vh'}} justify={"center"}>
                         <Col span={24} >
+                            <Input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Title here..."/>
                             <CKEditor
                                 editor={ ClassicEditor }
-                                data="<h1>Type Title of the Discussion...</h1><p>what do you think about it?</p>"
+                                data="<p>Discussion here...</p>"
                                 onReady={ editor => {
                                     // You can store the "editor" and use when it is needed.
                                     
                                 } }
                                 onChange={ ( event, editor ) => {
                                     const data = editor.getData();
-                                    
+                                    setDiscussionData(data)
                                 } }
                                 onBlur={ ( event, editor ) => {
                                     
@@ -79,12 +107,8 @@ const CreateDiscussion = () => {
                         </Col>
                     </Row>
                     <Row justify={"end"} style={{marginTop:'3vh'}}>
-                        
-                        <Col style={{marginRight:'25px'}}>
-                            <Button type="dashed" icon={<ClockCircleTwoTone />}>Save Draft</Button>
-                        </Col>
                         <Col>
-                            <Button type="primary" icon={<SendOutlined />}>Publish</Button>
+                            <Button onClick={onPublishDiscussion} type="primary" block icon={<SendOutlined />}>Publish</Button>
                         </Col>
                     </Row> 
                     

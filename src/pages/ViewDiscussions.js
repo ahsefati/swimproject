@@ -112,8 +112,7 @@ const ViewDiscussion = () => {
                     </Row>
                     <Row justify={"center"}>
                         <Row style={{marginTop:'1vh', width:'80vw', height:'80vh', maxWidth:'80vw', maxHeight:'80vh', overflowY:'auto',}} justify={"start"}>
-                            
-                            { discussionsData.map((discussionData)=>{
+                            { discussionsData.length > 0 && discussionsData.map((discussionData)=>{
                                     return (
                                         <Col key={discussionData.id} style={{height:'fit-content', padding:'0px'}} xs={24} sm={24} md={12} lg={8} xl={8} xxl={6}>
                                             <Card
@@ -128,15 +127,20 @@ const ViewDiscussion = () => {
                                             >
                                                 <Skeleton loading={false} avatar active>
                                                     <Meta
-                                                        avatar={discussionData.avatar}
-                                                        title={<><Text style={{fontSize:'1.3em', fontWeight:'bolder'}}>{discussionData.title}</Text><br/><Tag color={'blue'}>{discussionData.author}</Tag></>}
-                                                        description={discussionData.shortDescription}
+                                                        avatar={discussionData.user_name.charAt(0)}
+                                                        title={<><Text style={{fontSize:'1.3em', fontWeight:'bolder'}}>{discussionData.title}</Text><br/>
+                                                                <Tag color={discussionData.user_name.length<12? 'blue':discussionData.user_name.length<15? 'red': 'purple'}>
+                                                                    {discussionData.user_name}
+                                                                </Tag>
+                                                            </>
+                                                            }
+                                                        description={discussionData.content.split("</")[0].split(">")[1]}
                                                     />
                                                     <Divider/>
                                                     <Row justify={"space-between"} align={"middle"}>
                                                         <Col>
-                                                            <CommentOutlined style={{fontSize:'1.3em', marginRight:'5px'}}/><Text>{discussionData.comments}</Text>
-                                                            <HeartOutlined style={{marginLeft:'10px' ,fontSize:'1.3em', marginRight:'5px'}}/><Text>{discussionData.likes}</Text>
+                                                            <CommentOutlined style={{fontSize:'1.3em', marginRight:'5px'}}/><Text>{discussionData.num_comments}</Text>
+                                                            <HeartOutlined style={{marginLeft:'10px' ,fontSize:'1.3em', marginRight:'5px'}}/><Text>{discussionData.num_likes}</Text>
                                                         </Col>
                                                         <Col>
                                                             <RightCircleFilled style={{fontSize:'1.8em', color:'#4288e1'}}/>

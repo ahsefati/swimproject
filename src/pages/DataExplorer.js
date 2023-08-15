@@ -79,11 +79,25 @@ const reveal = () => {
 
 const DataExplorer = () => {
 
-    const [dataSource, setDataSource] = useState(data)
+    window.addEventListener('scroll', reveal);
+
+    const [dataSource, setDataSource] = useState([])
 
     window.addEventListener('scroll', reveal);
 
     useEffect(()=>{
+        fetch('https://swim-watershed.ucalgary.ca/cgi-bin/app.cgi/api/getallfiles', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, 
+          method: 'GET',
+        }).then((response) => response.json())
+        .then((res) => {
+          console.log(res.data)
+          setDataSource(res.data)
+        });
+
         setInterval(() => {
             reveal()
         }, 100);
@@ -104,11 +118,6 @@ const DataExplorer = () => {
     const handleReset = (clearFilters) => {
         clearFilters();
         setSearchText('');
-    };
-
-    const handleDelete = (key) => {
-        const newData = dataSource.filter((item) => item.key !== key);
-        setDataSource(newData);
     };
 
     const getColumnSearchProps = (dataIndex) => ({
@@ -209,43 +218,45 @@ const DataExplorer = () => {
     const columns = [
     
         {
-            title: 'Name',
+            title: 'Name of File',
             dataIndex: 'name',
             key: 'name',
-            width: '30%',
+            width: '15%',
             ...getColumnSearchProps('name'),
         },
         {
-            title: 'Owners',
-            key: 'owners',
-            dataIndex: 'owners',
-            width:'25%',
+            title: 'Description',
+            dataIndex: 'desc',
+            key: 'desc',
+            width: '20%',
+            ...getColumnSearchProps('desc'),
+        },
+        {
+            title: 'File Owner Name',
+            key: 'user_name',
+            dataIndex: 'user_name',
+            width:'10%',
             responsive: ['sm'],
-            ...getColumnSearchProps('owners'),
-            render: (tags) => (
-              <span>
-                {tags.map((tag) => {
-                  let color = 'purple'
-                  if (tag.length==4){
-                    color = 'blue'
-                  }
-                  if (tag.length==5){
-                    color = 'red'
-                  }
-                  return (
-                    <Tag color={color} key={tag}>
-                      {tag}
+            ...getColumnSearchProps('user_name'),
+            render: (_, record) =>
+                <>
+                    <Tag color={record.user_name.length<12? 'blue':record.user_name.length<15? 'red': 'purple'} key={record.id}>
+                    {record.user_name}
                     </Tag>
-                  );
-                })}
-              </span>
-            ),
+                </>
+        },
+        {
+            title: 'Owner Email',
+            dataIndex: 'user_email',
+            key: 'user_email',
+            width: '20%',
+            ...getColumnSearchProps('user_email'),
         },
         {
             title: 'Date',
-            dataIndex: 'dateUpload',
-            key: 'dateUpload',
-            width: '20%',
+            dataIndex: 'date',
+            key: 'date',
+            width: '10%',
             ...getColumnSearchProps('dateUpload'),
             sorter: (a, b) => new Date(a.dateUpload) - new Date(b.dateUpload),
             sortDirections: ['descend', 'ascend'],
@@ -254,12 +265,14 @@ const DataExplorer = () => {
         {
             title: 'Actions',
             dataIndex: 'actions',
-            width:'25%',
+            width:'20%',
             render: (_, record) =>
-                dataSource.length >= 1 ? (<>
-                <a style={{marginLeft:'10px'}}>Download</a>
-                </>
-                ) : null,
+            <>
+                {(record.name.includes(".jpeg") || record.name.includes(".jpg") || record.name.includes(".png") || record.name.includes(".pdf") ) &&
+                <a style={{marginLeft:'12px'}} href={"https://swim-watershed.ucalgary.ca/cgi-bin/uploadedfiles/"+record.name}>Preview</a>
+                }
+                <a download style={{marginLeft:'12px'}} href={"https://swim-watershed.ucalgary.ca/cgi-bin/uploadedfiles/"+record.name}>Download</a>
+            </>
         },
     ];
 
