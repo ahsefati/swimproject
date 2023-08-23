@@ -1,7 +1,7 @@
 import { Row, Typography, Layout, Col, Skeleton, Avatar, Card, Input, Divider, Tag} from "antd";
 
 import React from 'react';
-
+import HTMLRenderer from 'react-html-renderer';
 import { useEffect, useState, useRef } from "react";
 import '../css/ViewDiscussion.css'
 import { height } from "@mui/system";
@@ -148,7 +148,7 @@ const ViewDiscussion = () => {
                                                                     </Tag>
                                                                 </>
                                                                 }
-                                                            description={discussionData.content.replaceAll("\<.*?\>", "")}
+                                                            description={<HTMLRenderer html={discussionData.content}/>}
                                                         />
                                                         <Divider/>
                                                         <Row justify={"space-between"} align={"middle"}>
