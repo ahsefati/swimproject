@@ -56,12 +56,12 @@ const Dashboard = () => {
                 {key:'ViewDiscussions', label:<Link to={'/dashboard/viewdiscussions'}>View Discussions</Link>},
             ]
         },
-        {key:'Network', icon:<GlobalOutlined /> , label:'Network', 
-            children: [
-                {key:'MyNetwork', label:'My Network'},
-                {key:'SearchNetwork', label:'Global'},
-            ]
-        }
+        // {key:'Network', icon:<GlobalOutlined /> , label:'Network', 
+        //     children: [
+        //         {key:'MyNetwork', label:'My Network'},
+        //         {key:'SearchNetwork', label:'Global'},
+        //     ]
+        // }
     ]
 
     return(
